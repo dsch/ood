@@ -6,9 +6,9 @@ void bar() {
   this->foo();
 }
 
-}
+};
 
 class B : A
 {
   void foo();
-}
+};

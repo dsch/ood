@@ -1,0 +1,8 @@
+*.pdf
+*.synctex.gz
+build
+.project
+.cproject
+.settings
+.texlipse
+tmp

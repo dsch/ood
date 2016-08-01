@@ -1,4 +1,5 @@
-\documentclass{beamer}
+\documentclass[hyperref={bookmarksdepth=4}]{beamer}
+
 \usetheme{Madrid}
 \setbeameroption{show notes}
 
@@ -16,7 +17,10 @@
 \title{Object Oriented Design}
 \author{David Schneider}
 
-\AtBeginLecture{\section{\insertlecture}\frame{\Large\insertlecture}}
+
+\AtBeginLecture{%
+  \section{\insertlecture}\frame{\Large\insertlecture}%
+}
 
 \begin{document}
 
@@ -24,7 +28,7 @@
 
 \lecture{Introduction}
 
-\section{Object-oriented programming}
+\subsection{Object-oriented programming}
 
 \begin{frame}{Pradigma}
 OOP is a programming pradigma
@@ -51,7 +55,7 @@ data tends to carry with it a collection of functions
 
 \end{frame}
 
-\section{Object-oriented concepts}
+\subsection{Object-oriented concepts}
 
 \begin{frame}{Classes and objects}
 
@@ -81,11 +85,10 @@ classes.
 
 \begin{frame}{Polymorphism}
 \framesubtitle{aka Subtyping}
-Define a implementation for a specialied type.
+Define a implementation for a specialized type.
 \end{frame}
 
-\section{C++}
-\subsection{Overview}
+\subsection{C++}
 \begin{frame}{C++ - Overview}
 \begin{itemize}
   \item compiled language
@@ -103,7 +106,7 @@ Define a implementation for a specialied type.
 \end{itemize}
 \end{frame}
 
-\subsection{Standardization}
+
 \begin{frame}{C++ - Standardization}
 \itemize{}
 \item[1979] C with Classes first implemented 
@@ -133,33 +136,31 @@ Design is all about changable code.
 Code is written once, but read many times.
 \end{frame}
 
-\section{Features}
+\subsection{Features}
 
 \begin{frame}
-\subsection{Objects and classes}
 accessibility
 \end{frame}
 
-\subsection{Encapsulation}
 \begin{frame}{Encapsulation}
 abstraction
 information hidding
 hide internal details, which allows changing this details
 \end{frame}
 
-\subsection{Inheritance}
 \begin{frame}{Inheritance}
 Base class
 Abstract class
 \end{frame}
 
-\subsection{Composition and delegation}
-\subsection{Polymorphism}
+\begin{frame}{Composition and delegation}
+TODO
+\end{frame}
+
 \begin{frame}{Polymorphism}
 subtyping
 \end{frame}
 
-\subsection{Open recursion}
 \begin{frame}{Open recursion}[fragil]
 Virtual methods
 
@@ -169,15 +170,15 @@ Virtual methods
 \end{frame}
 
 
-\section{Pattern}
+\subsection{Pattern}
 
 
-\subsection{GRASP}
+\frame{GRASP}
 
 \subsection{SOLID}
 
 \begin{frame}{S.O.L.I.D - Principals}
-From by Robert C. Martin (Oncle Bob)
+Defined by Robert C. Martin (Oncle Bob)
 
 
 \begin{description}
@@ -209,11 +210,34 @@ without altering the correctness of that program.''
 \begin{frame}{Dependency Inversion Principle}
 \end{frame}
 
-\section{Clean Code}
+\subsection{Clean Code}
 
 \lecture{Object Oriented Design - Pattern}
 
+\begin{frame}{Pattern}
+\begin{itemize}
+  \item singelton
+  \item factory
+  \item command
+  \item observer
+  \item strategy
+  \item visitor
+  \item null object
+  \item adapter
+  \item proxy
+  \item fly-weight
+\end{itemize}
+\end{frame}
+
 \lecture{C++ Features}
+
+\begin{frame}
+\begin{itemize}
+  \item constructor destructor
+  \item operator overload
+  \item templates meta programming
+\end{itemize}
+\end{frame}
 
 \lecture{C++ and C}
 
@@ -222,14 +246,10 @@ without altering the correctness of that program.''
 \lecture{Clean Code}
 
 \lecture{Testing}
-
-\begin{frame}
-\begin{itemize}
-  \item Test-pyramid
-  \item Unittest (SIL-test)
-  \item Design for testability
-\end{itemize}
-
-\end{frame}
+\part{MyPart}
+\subsection{Test-pyramid}
+\subsection{Unittest (SIL-test)}
+\subsection{Design for testability}
+\subsubsection{test}
 
 \end{document}

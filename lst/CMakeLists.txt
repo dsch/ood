@@ -1,1 +1,1 @@
-add_library(dummy OBJECT open_recursion.cpp)
+add_library(dummy open_recursion.cpp)

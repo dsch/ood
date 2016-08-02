@@ -1,7 +1,7 @@
 language: generic
 before_install:
   - sudo apt-get -qq update
-  - sudo apt-get install -y --no-install-recommends texlive-latex-base latex-beamer
+  - sudo apt-get install -y --no-install-recommends texlive-latex-base latex-beamer lmodern
 
 script:
   - mkdir build && cd build

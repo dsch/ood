@@ -1,10 +1,11 @@
-\documentclass[hyperref={bookmarksdepth=4}]{beamer}
+\documentclass{beamer}
 
-\usetheme{Madrid}
+%\usetheme{Madrid}
 \setbeameroption{show notes}
 
 \usepackage{listings}
 \lstset{language=[ISO]C++,
+        basicstyle=\ttfamily\scriptsize,
         keywordstyle=\color{blue},
         stringstyle=\color{red},
         commentstyle=\color{green},
@@ -14,7 +15,7 @@
 \usepackage{lmodern}
 \usepackage{color}
 
-\title{Object Oriented Design}
+\title{Advanced Programming Techniques}
 \author{David Schneider}
 
 
@@ -127,9 +128,25 @@ Define a implementation for a specialized type.
 \end{frame}
 
 \lecture{Buildsystem}
+\subsection{Tools}
+\begin{frame}{Tools}
+\begin{description}
+  \item[Code:Blocks] \url{http://www.codeblocks.org/}
+  \note[item]{Code:Blocks: IDE, Contains GCC compiler}
+  \item[Git for Windows] \url{https://git-for-windows.github.io/}
+  \note[item]{Git for Windows: Git CLI (git.exe) used as back-end for
+  TortoiseGit}
+  \item[TortoiseGit] \url{https://tortoisegit.org/}
+  \item[CMake] \url{https://cmake.org/}  
+\end{description}
+
+\begin{note}
+  
+\end{note}
+ 
+\end{frame}
 
 \lecture{OO-Basics}
-
 
 \begin{frame}
 Design is all about changable code.
@@ -161,7 +178,7 @@ TODO
 subtyping
 \end{frame}
 
-\begin{frame}{Open recursion}[fragil]
+\begin{frame}{Open recursion}
 Virtual methods
 
 \lstinputlisting[caption=Open recursion]{lst/open_recursion.cpp}
@@ -229,21 +246,110 @@ without altering the correctness of that program.''
 \end{itemize}
 \end{frame}
 
-\lecture{C++ Features}
+\lecture{C++}
 
-\begin{frame}
+\begin{frame}{Source}
+C++ Language Tutorial
+Source: \url{http://www.cplusplus.com/doc/tutorial/}
+\note{reference on cplusplus.com contains some errors,
+http://stackoverflow.com/questions/6520052/whats-wrong-with-cplusplus-com}
+\end{frame}
+
+\part{Basics of C++}
+\subsection{Structure of a program}
+
+\subsection{Variables and types}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Identifiers}
 \begin{itemize}
-  \item constructor destructor
-  \item operator overload
-  \item templates meta programming
+  \item case-sensitive
+  \item sequence of one or more letters, digits, or underscore
+  \item always begin with a letter
+  \item begin with underscore allowd, but used for special cases
+  \item many reserved keywords, which can't be used as identifiers 
+\end{itemize}
+\begin{lstlisting}[caption=Identifiers Examples]
+int aNumber
+my1st_variable
+SomeMoreIdentivier
+\end{lstlisting}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Fundamental data types}
+\begin{itemize}
+  \item Character types
+  \item Numerical integer types
+  \item Floating-point types
+  \item Boolean type
 \end{itemize}
 \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Fundamental data types}
+\includegraphics[scale=0.5]{img/FundamentalTypes.png}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Declaration of variables}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Initialization of variables}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Type deduction: auto and decltype}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Introduction to strings}
+
+\end{frame}
+
+
+\subsection{Constants}
+\subsection{Operators}
+\subsection{Basic Input/Output}
+
+\part{Program structure}
+\subsection{Control Structures}
+\subsection{Functions}
+\subsection{Overloads and templates}
+\subsection{Name visibility}
+
+\part{Compound data types}
+\subsection{Arrays}
+\subsection{Character sequences}
+\subsection{Pointers}
+\subsection{Dynamic Memory}
+\subsection{Data structures}
+\subsection{Other data types}
+
+\part{Classes}
+\subsection{Classes}
+\subsection{Special members}
+\subsection{Friendship and inheritance}
+\subsection{Polymorphism}
+
+\part{Other language features}
+\subsection{Type conversions}
+\subsection{Exceptions}
+\subsection{Preprocessor directives}
 
 \lecture{C++ and C}
 
 \lecture{Standards}
 
 \lecture{Clean Code}
+
+\lecture{Coding Standards}
+
+\subsection{MISRA}
 
 \lecture{Testing}
 \part{MyPart}

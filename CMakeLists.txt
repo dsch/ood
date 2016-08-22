@@ -3,6 +3,7 @@ project(OOP CXX)
 
 include(UseLATEX.cmake)
 add_latex_document(script.tex
-                   INPUTS lst/open_recursion.cpp)
+                   INPUTS lst/open_recursion.cpp
+                   IMAGE_DIRS img)
                  
-add_subdirectory(lst)  
+add_subdirectory(lst)

@@ -1,14 +1,18 @@
-class A {
-virtual void foo() = 0;
-virtual ~A();
+class A
+{
+public:
+    virtual void foo() = 0;
+    virtual ~A();
 
-void bar() {
-  this->foo();
-}
+    void bar()
+    {
+        this->foo();
+    }
 
 };
 
-class B : A
+class B: A
 {
-  void foo();
+public:
+    void foo();
 };

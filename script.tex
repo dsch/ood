@@ -270,9 +270,9 @@ http://stackoverflow.com/questions/6520052/whats-wrong-with-cplusplus-com}
   \item many reserved keywords, which can't be used as identifiers 
 \end{itemize}
 \begin{lstlisting}[caption=Identifiers Examples]
-int aNumber
+aNumber
 my1st_variable
-SomeMoreIdentivier
+SomeMoreIdentifier
 \end{lstlisting}
 \end{frame}
 
@@ -288,26 +288,48 @@ SomeMoreIdentivier
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Fundamental data types}
-\includegraphics[scale=0.5]{img/FundamentalTypes.png}
+\includegraphics[scale=0.48]{img/FundamentalTypes.png}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Declaration of variables}
-
+\begin{frame}[fragile]{Declaration of variables}
+\begin{itemize}
+  \item Strongly typed
+  \item Every variable to be declared before first use
+\end{itemize}
+\begin{lstlisting}[caption=Variable declaration]
+int aNumber;
+float aFloatingPointerNumber;
+\end{lstlisting}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Initialization of variables}
-
+\begin{frame}[fragile]{Initialization of variables}
+\begin{definition}{Initialization}
+   Set the value of variable during declaration. 
+\end{definition}
+\begin{lstlisting}[caption=Variable initialization]
+int aNumber = 5;
+float aFloatingPointerNumber(6);
+\end{lstlisting}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Type deduction: auto and decltype}
+\begin{frame}[fragile]{Type deduction: auto and decltype}
+Automatic type determination with keyword `auto`.
+
+Usefull for cases where the explicitly type is not so importent or the type is
+so complex (ex. with templates) that it's hard the define the type correct.
+
+\lstinputlisting[caption=Auto Type]{lst/AutoType.cpp}
 
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Introduction to strings}
+Example for compound types: std::string
+
+\lstinputlisting[caption=String Example]{lst/SimpleString.cpp}
 
 \end{frame}
 

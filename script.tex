@@ -336,6 +336,87 @@ Example for compound types: std::string
 
 
 \subsection{Constants}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Literals}
+
+\begin{lstlisting}[caption=Integer Numerals]
+75         // decimal
+0113       // octal
+0x4b       // hexadecimal
+\end{lstlisting}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Literals}
+
+\begin{lstlisting}[caption=Floating Point Numerals]
+3.14159    // 3.14159
+6.02e23    // 6.02 x 10^23
+1.6e-19    // 1.6 x 10^-19
+3.0        // 3.0
+\end{lstlisting}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Literals}
+\begin{table}
+\begin{tabular}{l | c}
+Suffix & Type modifier \\
+\hline
+u or U & unsigned \\
+l or L & long \\
+ll or LL & long long \\
+f or F & float \\
+l or L & long double
+\end{tabular}
+\caption{Type modifier}
+\end{table}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Character and string literals}
+
+\begin{lstlisting}[caption=Character and string literals]
+'z'
+'p'
+"Hello world"
+"How do you do?"
+\end{lstlisting}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Other literals}
+\begin{lstlisting}[caption=Other literals]
+bool foo = true;
+bool bar = false;
+int* p = nullptr;
+\end{lstlisting}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Typed constant expressions}
+\begin{lstlisting}[caption=Typed constant expressions]
+const double pi = 3.1415926;
+const char tab = '\t';
+\end{lstlisting}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Preprocessor definitions}
+\begin{lstlisting}[caption=Preprocessor definitions]
+#define PI 3.14159
+#define NEWLINE '\n'
+\end{lstlisting}
+
+\end{frame}
+
+
 \subsection{Operators}
 \subsection{Basic Input/Output}
 

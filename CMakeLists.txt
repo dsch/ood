@@ -6,7 +6,7 @@ string(REPLACE ";" " " INPUTS ${INPUT_FILES})
 
 include(UseLATEX.cmake)
 add_latex_document(script.tex
-                   INPUTS ${INPUT_FILES}                   
+                   INPUTS ${INPUT_FILES}
                    IMAGE_DIRS img)
                  
 add_subdirectory(lst)

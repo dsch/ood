@@ -20,15 +20,66 @@
 \author{David Schneider}
 
 
-\AtBeginLecture{\frame{\Large\insertlecture}}
-
 \begin{document}
 
 \frame{\titlepage}
 
-\lecture{Introduction}
+\part{Overview}
 
-\section{\insertlecture}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\begin{description}
+\item[Umfang] 5 ECTS
+\item[Lehr- und Lernformen]: Vorlesung mit integrierter Übung
+\item[Prüfungsmodalitäten]: LV-abschließende Prüfung; Projektarbeit - Prüfungsgespräch über die Projektarbeit
+\end{description}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Lehrinhalte}
+Erlernen von Konzepten der objektorientierten Programmierung anhand der
+Programmiersprache C++ (Klassen und Objekte, Kapselung, Vererbung und
+Polymorphismus), Fehler- und Ausnahmebehandlung, Coding Guidelines, Design
+Patterns, Design for Testability. Bildung von Modellen, Abstraktion,
+Lösungsfindung und Evaluation in der  objektorientierten Programmierung.
+Einbindung vorhandener Lösungskonzepte und systematische Herangehensweise an
+konkreten Problemstellungen.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Literaturempfehlungen}
+\begin{itemize}
+\item E. Gamma et al., Design Patterns, Addison-Wesley (1995)
+\item R. Martin, Clean Code, Prentice Hall Pearson Education (2009)
+\item B. Stroustrup: The C++ Programming Language, 4th edition, Addison Wesley
+(2013)
+\item A. Alexandrescu: Modern C++ Design, Addison Wesley (2001)
+\item H. Sutter: C++ Coding Standards, Addison Wesley (2004)
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Termine 2016}
+\begin{table}
+\begin{tabular}{l | l }
+Datum & Raum \\
+\hline
+23.09.2016 & EDV5 \\
+30.09.2016 & EDV2 \\
+07.10.2016 & EDV2 \\
+14.10.2016 & EDV2 \\
+21.10.2016 & EDV2 \\
+28.10.2016 & EDV2 \\
+04.11.2016 & EDV2 \\
+11.11.2016 & EDV2 \\
+18.11.2016 & EDV2 \\
+25.11.2016 & EDV2
+\end{tabular}
+\end{table}
+\end{frame}
+
+\part{Introduction}
+
+\section{Introduction}
 
 \subsection{Object-oriented programming}
 
@@ -128,8 +179,9 @@ Define a implementation for a specialized type.
 \end{itemize}
 \end{frame}
 
-\lecture{Buildsystem}
-\section{\insertlecture}
+\part{Buildsystem}
+
+\section{Buildsystem}
 \subsection{Tools}
 \begin{frame}{Tools}
 \begin{description}
@@ -144,8 +196,9 @@ Define a implementation for a specialized type.
 
 \end{frame}
 
-\lecture{OO-Basics}
-\section{\insertlecture}
+\part{OO-Basics}
+
+\section{OO-Basics}
 
 \begin{frame}
 Design is all about changable code.
@@ -228,8 +281,8 @@ without altering the correctness of that program.''
 
 \subsection{Clean Code}
 
-\lecture{Object Oriented Design - Pattern}
-\section{\insertlecture}
+\part{Object Oriented Design - Pattern}
+\section{Object Oriented Design - Pattern}
 
 \begin{frame}{Pattern}
 \begin{itemize}
@@ -246,8 +299,7 @@ without altering the correctness of that program.''
 \end{itemize}
 \end{frame}
 
-\lecture{C++}
-\section{\insertlecture}
+\part{C++ Tutorial}{cpp-tutorial}
 
 \begin{frame}{Source}
 C++ Language Tutorial
@@ -255,6 +307,8 @@ Source: \url{http://www.cplusplus.com/doc/tutorial/}
 \note{reference on cplusplus.com contains some errors,
 http://stackoverflow.com/questions/6520052/whats-wrong-with-cplusplus-com}
 \end{frame}
+
+\section{Basics of C++}
 
 \subsection{Structure of a program}
 \begin{frame}
@@ -385,7 +439,10 @@ l or L & long double
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[fragile]{Character and string literals}
-
+\begin{description}
+\item[Character] A singel character, between single quotes
+\item[String] Null-terminated string, between double quotes 
+\end{description}
 \begin{lstlisting}[caption=Character and string literals]
 'z'
 'p'
@@ -397,6 +454,11 @@ l or L & long double
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[fragile]{Other literals}
+\begin{description}
+\item[Boolean] true and false
+\item[Null-Pointer] reserved value to indicated, that a pointer doesn't refer to
+a valid object
+\end{description}
 \begin{lstlisting}[caption=Other literals]
 bool foo = true;
 bool bar = false;
@@ -517,41 +579,35 @@ const char tab = '\t';
 \end{frame}
 
 
-\lecture{C++ and C}
-\section{\insertlecture}
+\part{C++ and C}
+\section{C++ and C}
 \begin{frame}
 
 \end{frame}
 
-\lecture{Standards}
-\section{\insertlecture}
-\begin{frame}
-
-\end{frame}
-
-
-\lecture{Clean Code}
-\section{\insertlecture}
+\part{Standards}
+\section{Standards}
 \begin{frame}
 
 \end{frame}
 
 
-\lecture{Coding Standards}
-\section{\insertlecture}
+\part{Clean Code}
+\section{Clean Code}
 \begin{frame}
 
 \end{frame}
 
 
-\subsection{MISRA}
+\part{Coding Standards}
+\section{MISRA}
 \begin{frame}
 
 \end{frame}
 
 
-\lecture{Testing}
-\section{\insertlecture}
+\part{Testing}
+\section{TODO}
 \subsection{Test-pyramid}
 \begin{frame}
 

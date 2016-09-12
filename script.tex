@@ -991,20 +991,73 @@ friend
 
 \part{Testing}
 \section{Testing}
-\subsection{Test-pyramid}
-\begin{frame}
-
+\begin{frame}{Testing}
+We're talking about automated testing!
 \end{frame}
 
-\subsection{Unittest (SIL-test)}
-\begin{frame}
+\subsection{Test-pyramid}
+\begin{frame}{Test pyramid}
+\includegraphics[scale=0.48]{img/TestPyramid.png}
+\end{frame}
 
+\begin{frame}{System test}
+\begin{itemize}
+  \item Test a whole (embedded) system
+  \item Often automated in a Hardware-in-the-loop (HIL) system
+  \item Blackbox test (internal design is unknown to the tester)
+  \item Qualification test (against customer requirements)
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Integration test}
+\begin{itemize}
+  \item Test how the single modules (units) are wired
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Unit test}
+\begin{itemize}
+  \item Test the behavior of one single translation unit
+\end{itemize}
+\end{frame}
+
+\subsection{Unit testing}
+\begin{frame}{Unit testing}
+\begin{itemize}
+  \item Test only the public interface
+  \item If you think a implementation detail should be tested, then it's perhaps
+  an own unit
+\end{itemize}
+\end{frame}
+
+\begin{frame}{A good test}
+\begin{itemize}
+  \item Automatic
+  \item Thorough
+  \item Repeatable
+  \item Independent
+  \item Professional
+  \item Fast
+\end{itemize}
 \end{frame}
 
 \subsection{Design for testability}
-\begin{frame}
+\begin{frame}{Design for testability}
 
 \end{frame}
 
+\begin{frame}{Unittesting in C}
+Link tests, unit under test and test harness to one executable.
+\end{frame}
+
+\subsection{Test driven development}
+
+\begin{frame}
+\begin{enumerate}
+  \item Add a test and see it fail (red)
+  \item Make your test pass (green)
+  \item Refactor code
+\end{enumerate}
+\end{frame}
 
 \end{document}

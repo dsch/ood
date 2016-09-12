@@ -4,3 +4,5 @@ file(GLOB INPUT_FILES *.cpp)
 add_library(dummy AutoType.cpp open_recursion.cpp)
 
 add_executable(SimpleString SimpleString.cpp)
+add_executable(Function Function.cpp)
+add_executable(DefaultValue DefaultValue.cpp)

@@ -11,6 +11,7 @@
         stringstyle=\color{red},
         commentstyle=\color{green},
         frame=single,
+        showspaces=false,
         }
         
 \usepackage{lmodern}
@@ -618,93 +619,351 @@ uint32_t sum = (uint32_t)a + b;
 
 \subsection{Basic Input/Output}
 
-\section{Program structure}
-\subsection{Control Structures}
-\begin{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Streams}
+\begin{itemize}
+\item Abstraction `Streams` for input and output operations
+\item Media independed (examples: file, consol, socket)
+\item streams are a source/destination of characters
+\item characters are provided/accepted sequentially
+\end{itemize}
+\end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Standard libray streams}
+\begin{table}
+\begin{tabular}{l | l}
+stream & description \\
+\hline
+cin & standard input stream \\
+cout & standard output stream \\
+cerr & standard error (output) stream \\
+clog & standard logging (output) stream \\
+\end{tabular}
+\caption{Bitwise operators}
+\end{table}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Standard output (cout)}
+\begin{lstlisting}[caption=Standard output]
+// prints Output sentence on screen
+std::cout << "Output sentence" 
+
+// prints number 120 on screen
+std::cout << 120;
+
+// prints the value of x on screen
+std::cout << x;
+\end{lstlisting}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{New line}
+\begin{lstlisting}[caption=Use ASCII newline character]
+std::cout << "First sentence.\n";
+std::cout << "Second sentence.\nThird sentence.";
+\end{lstlisting}
+
+\begin{lstlisting}[caption=Use portable endl]
+std::cout << "First sentence." << std::endl;
+std::cout << "Second sentence." << std::endl
+          << "Third sentence.";
+\end{lstlisting}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Standard input (cin)}
+\begin{itemize}
+\item Input is only processed after `ENTER` key pressed
+\item If conversion fails, not value is assigned
+\item Spaces are always consideres as value terminator, which makes it difficult
+to read a whole sentense into a string
+\end{itemize}
+
+\begin{lstlisting}[caption=Standard input]
+int i;
+std::cout << "Please enter an integer value: ";
+std::cin >> i;
+std::cout << "The value you entered is " << i;
+std::cout << " and its double is " << i*2 << "." 
+          << std::endl;
+\end{lstlisting}
+\end{frame}
+
+
+\section{Program structure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Single statment vs. compound statement}
+Where ever a single statement can be used, also a compound statement (block) can
+be inserted.  compound statement is a group of statements (each of them
+terminated by its own semicolon), but all grouped together in a block, enclosed 
+in curly braces: {}:
+\begin{lstlisting}[caption=Compound statement]
+{ 
+  statement1; 
+  statement2; 
+  statement3;
+}
+\end{lstlisting}
+\end{frame}
+
+
+\subsection{Statements and flow control}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Selection statements}
+\begin{lstlisting}[caption=If and else]
+if (expression)
+  statement;
+else
+  statement;
+\end{lstlisting}
+
+\begin{lstlisting}[caption=Switch]
+switch (expression)
+{
+  case constant1:
+     statement;
+     break;
+  case constant2:
+     statement;
+     break;
+  default:
+     statement;
+}
+\end{lstlisting}
+
+\end{frame}
+
+\begin{frame}{Iteration statements (loops)}
+\begin{itemize}
+  \item while (expression) statement;
+  \item do statement while (condition);
+  \item for (initialization; condition; increase) statement;
+  \item for ( declaration : range ) statement;
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Jump statements}
+\begin{itemize}
+  \item The break statement
+  \item The continue statement
+  \item The goto statement
+\end{itemize}
 \end{frame}
 
 \subsection{Functions}
 \begin{frame}
+\lstinputlisting[caption=Function example]{lst/Function.cpp}
+\end{frame}
 
+\begin{frame}[fragile]{Arguments passed by value and by reference}
+\begin{description}
+\item[pass by value] Value is copied
+\item[pass by reference] Value is referenced
+\end{description}
+\begin{lstlisting}[caption=Const reference parameter]
+std::string concatenate(const std::string& a,
+                        const std::string& b)
+{
+  return a + b;
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Default values in parameters}
+\lstinputlisting[caption=Default value example]{lst/DefaultValue.cpp}
 \end{frame}
 
 \subsection{Overloads and templates}
-\begin{frame}
+\begin{frame}[fragile]{Overloaded functions}
+\begin{lstlisting}[caption=Overloaded functions]
+int operate(int a, int b)
+{
+  return a * b;
+}
+
+double operate(double a, double b)
+{
+  return a / b;
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Templates}
+\begin{lstlisting}[caption=Templates]
+template <class T>
+T sum(T a, T b)
+{
+  return a + b;
+}\end{lstlisting}
+\end{frame}
+
+\subsection{Name visibility}
+\begin{frame}{Scopes}
+\begin{description}
+\item[global scope] valid anywhere in the code
+\item[namespace scope] group of entities in global scope
+\item[local scope] only visible within the specific block in which it is
+declared
+\end{description}
+\end{frame}
+
+\begin{frame}[fragile]{Namespaces}
+\begin{lstlisting}[caption=Namespace]
+namespace myNamespace
+{
+  int a;
+  float b;
+}
+
+void foo()
+{
+  std::cout << myNamespace::a;
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Using}
+The keyword using introduces a name into the current declarative region (such as
+a block), thus avoiding the need to qualify the name.
+\begin{lstlisting}[caption=using]
+void foo()
+{
+  using std::cout;
+  cout << "it's here";
+}
+\end{lstlisting}
+\begin{lstlisting}[caption=using namespace]
+using namespace myNamespace;
+\end{lstlisting}
+
+\begin{lstlisting}[caption=namespace alias]
+namespace expr = boost::log::expressions;
+\end{lstlisting}
 
 \end{frame}
-\subsection{Name visibility}
-\begin{frame}
 
+\begin{frame}{Storage classes}
+\begin{description}
+\item[static storage] Global, initalized to zero
+\item[automatic storage] Local, uninitialized
+\end{description}
 \end{frame}
 
 \section{Compound data types}
 \subsection{Arrays}
-\begin{frame}
+\begin{frame}[fragile]{Array}
+\begin{lstlisting}[caption=Array declaration]
+int foo[5];
+int bar[2][3];
+\end{lstlisting}
 
+\begin{lstlisting}[caption=Array initalisation]
+int foo[5] = { 16, 2, 77, 40, 12071 };
+int bar[2][3] = { {1, 2, 3 }, {4, 5, 6} };
+\end{lstlisting}
+
+\begin{lstlisting}[caption=Array access]
+foo[2] = 75;
+x = bar[0][2];
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Arrays as parameters}
+\begin{lstlisting}[caption=array as pointer]
+void printarray (int array[], int length)
+{
+  for (int n = 0; n < length; ++n)
+  {
+    std::cout << array[n] << ' ';
+  }
+  std::cout << std::endl;
+}
+\end{lstlisting}
+
+\begin{lstlisting}[caption=array as object]
+template<std::size_t SIZE>
+void printarray(std::array<int, SIZE>& array)
+{
+  for (auto& e : arr)
+  {
+    std::cout << e;
+  }
+}\end{lstlisting}
 \end{frame}
 
 \subsection{Character sequences}
-\begin{frame}
-
+\begin{frame}[fragile]{Character sequences}
+\begin{lstlisting}[caption=Character sequences]
+char myword[] = { 'H', 'e', 'l', 'l', 'o', '\0' };
+char myword[] = "Hello";
+\end{lstlisting}
 \end{frame}
 
 \subsection{Pointers}
-\begin{frame}
-
+\begin{frame}[fragile]{Pointers}
+\begin{lstlisting}
+int myvar;
+int* myptr = &myvar;
+int * q = nullptr;
+\end{lstlisting}
 \end{frame}
 
 \subsection{Dynamic Memory}
-\begin{frame}
-
+\begin{frame}{Dynamic Memory}
+new and delete
 \end{frame}
 
 \subsection{Data structures}
-\begin{frame}
-
+\begin{frame}{Data structures}
+struct
 \end{frame}
 
 \subsection{Other data types}
-\begin{frame}
-
+\begin{frame}{Typedef}
+typedef
 \end{frame}
 
 
 \section{Classes}
 \subsection{Classes}
-\begin{frame}
+\begin{frame}{Classes}
 
 \end{frame}
 
 \subsection{Special members}
-\begin{frame}
+\begin{frame}{Special members}
 
 \end{frame}
 
 \subsection{Friendship and inheritance}
-\begin{frame}
-
+\begin{frame}{Friendship and inheritance}
+public
+private
+friend
 \end{frame}
 
 \subsection{Polymorphism}
-\begin{frame}
+\begin{frame}{Polymorphism}
 
 \end{frame}
 
 
 \section{Other language features}
 \subsection{Type conversions}
-\begin{frame}
+\begin{frame}{Type conversions}
 
 \end{frame}
 
 \subsection{Exceptions}
-\begin{frame}
+\begin{frame}{Exceptions}
 
 \end{frame}
 
 \subsection{Preprocessor directives}
-\begin{frame}
+\begin{frame}{Preprocessor directives}
 
 \end{frame}
 
@@ -715,17 +974,11 @@ uint32_t sum = (uint32_t)a + b;
 
 \end{frame}
 
-\part{Standards}
-\section{Standards}
-\begin{frame}
-
-\end{frame}
-
 
 \part{Clean Code}
 \section{Clean Code}
-\begin{frame}
-
+\begin{frame}{Express yourself in code}
+\url{https://simpleprogrammer.com/2015/04/13/why-comments-are-stupid-a-real-example/}
 \end{frame}
 
 
@@ -737,7 +990,7 @@ uint32_t sum = (uint32_t)a + b;
 
 
 \part{Testing}
-\section{TODO}
+\section{Testing}
 \subsection{Test-pyramid}
 \begin{frame}
 
@@ -749,11 +1002,6 @@ uint32_t sum = (uint32_t)a + b;
 \end{frame}
 
 \subsection{Design for testability}
-\begin{frame}
-
-\end{frame}
-
-\subsubsection{test}
 \begin{frame}
 
 \end{frame}

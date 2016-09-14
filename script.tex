@@ -1,11 +1,13 @@
 \documentclass{beamer}
+\usepackage[utf8]{inputenc}
 
 %\usetheme{Madrid}
 \setbeameroption{show notes}
-\setbeamertemplate{navigation symbols}{}
+\beamertemplatenavigationsymbolsempty
+\hypersetup{hidelinks}
 
 \usepackage{listings}
-\lstset{language=[ISO]C++,
+\lstset{language=[11]C++,
         basicstyle=\ttfamily\scriptsize,
         keywordstyle=\color{blue},
         stringstyle=\color{red},
@@ -13,22 +15,35 @@
         frame=single,
         showspaces=false,
         }
-        
+
+\lstdefinelanguage{cmake}
+{
+  morekeywords=
+  {
+    add_executable, target_link_libraries, add_test,
+  },
+}
+
 \usepackage{lmodern}
 \usepackage{color}
+\usepackage[backend=biber]{biblatex}
+\bibliography{script}{}
 
 \title{Advanced Programming Techniques}
 \author{David Schneider}
 
+\AtBeginPart{\frame{\partpage}\frame{\frametitle{Content Part
+\insertpart}\tableofcontents}}
 
 \begin{document}
 
 \frame{\titlepage}
 
 \part{Overview}
+\section{Overview}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
+\begin{frame}{Modalitäten}
 \begin{description}
 \item[Umfang] 5 ECTS
 \item[Lehr- und Lernformen]: Vorlesung mit integrierter Übung
@@ -64,16 +79,16 @@ konkreten Problemstellungen.
 \begin{tabular}{l | l }
 Datum & Raum \\
 \hline
-23.09.2016 & EDV5 \\
-30.09.2016 & EDV2 \\
-07.10.2016 & EDV2 \\
-14.10.2016 & EDV2 \\
-21.10.2016 & EDV2 \\
-28.10.2016 & EDV2 \\
-04.11.2016 & EDV2 \\
-11.11.2016 & EDV2 \\
-18.11.2016 & EDV2 \\
-25.11.2016 & EDV2
+23. September 2016 & EDV5 \\
+30. September 2016 & EDV2 \\
+07. Oktober 2016 & EDV2 \\
+14. Oktober 2016 & EDV2 \\
+21. Oktober 2016 & EDV2 \\
+28. Oktober 2016 & EDV2 \\
+04. November 2016 & EDV2 \\
+11. November 2016 & EDV2 \\
+18. November 2016 & EDV2 \\
+25. November 2016 & EDV2
 \end{tabular}
 \end{table}
 \end{frame}
@@ -105,7 +120,7 @@ data tends to be highly decoupled from the functions that operate on it
 data tends to carry with it a collection of functions
 \end{block}
 
-\note{http://stackoverflow.com/a/552474/6632389}
+\footfullcite{Stackoverflow1}
 
 \end{frame}
 
@@ -281,6 +296,9 @@ without altering the correctness of that program.''
 \end{frame}
 
 \subsection{Clean Code}
+\begin{frame}{Clean Code}
+TODO
+\end{frame}
 
 \part{Object Oriented Design - Pattern}
 \section{Object Oriented Design - Pattern}
@@ -1043,21 +1061,52 @@ We're talking about automated testing!
 
 \subsection{Design for testability}
 \begin{frame}{Design for testability}
-
+TODO
 \end{frame}
 
-\begin{frame}{Unittesting in C}
-Link tests, unit under test and test harness to one executable.
+\begin{frame}[fragile]{Unittesting in C}
+Link tests, unit-under-test and test-harness to one executable
+\begin{lstlisting}[language=cmake,caption=a unit test in cmake]
+add_executable(TestMyModule TestMyModule.cpp MyModule.cpp)
+target_link_libraries(TestMyModule gtest gtest_main)
+add_test(NAME MyModule COMMAND TestMyModule)
+\end{lstlisting}
 \end{frame}
 
 \subsection{Test driven development}
 
-\begin{frame}
+\begin{frame}{TDD Cycle}
 \begin{enumerate}
   \item Add a test and see it fail (red)
   \item Make your test pass (green)
   \item Refactor code
 \end{enumerate}
+\end{frame}
+
+\part{Version control}
+\section{Version control}
+
+\begin{frame}{Version control}
+\begin{block}{What is version control}
+Version control systems are a category of software tools that help a software
+team manage changes to source code over time
+\cite{AtlassianGitTutorials}
+\end{block}
+\end{frame}
+
+\section{Git - A Distributed Version Control System}
+\begin{frame}{Pro Git Book}
+\url{https://git-scm.com/book}
+\end{frame}
+
+\section{Workflow}
+\begin{frame}{Status}
+\end{frame}
+
+\begin{frame}{Commit}
+\end{frame}
+
+\begin{frame}{Branch}
 \end{frame}
 
 \end{document}

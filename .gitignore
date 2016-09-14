@@ -1,5 +1,6 @@
 *.pdf
 *.synctex.gz
+*-blx.bib
 build
 .project
 .cproject

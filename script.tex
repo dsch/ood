@@ -29,7 +29,7 @@
 \usepackage[backend=biber]{biblatex}
 \bibliography{script}
 
-\title{Advanced Programming Techniques}
+\title{Fortgeschrittene Programmiertechniken}
 \author{David Schneider}
 
 \AtBeginPart{\frame{\partpage}\frame{\frametitle{Content Part
@@ -40,6 +40,43 @@
 \frame{\titlepage}
 
 \part{Overview}
+
+\section{Über mich}
+
+\begin{frame}{Über mich}
+\begin{block}{Name}
+David Schneider
+\end{block}
+
+\begin{block}{Kontakt}
+E-Mail: \\
+\url{schneidav81@gmail.com} \\
+\url{david.schneider@fhwn.ac.at} \\
+Telefon: 0680 1454649
+\end{block}
+
+\end{frame}
+
+\begin{frame}{Erfahrungen}
+
+\begin{block}{Ausbildung}
+\begin{itemize}
+  \item Elektroniker Lehre mit Berufsmatura
+  \item Zürcher Fachhochschule, Elektrotechnik, Vertiefung Regelungstechnik und
+Computertechnik
+\end{itemize}
+\end{block}
+
+\begin{block}{Berufserfahrung}
+\begin{itemize}
+  \item Messsystem für hochprezise Temperaturmessung, IST AG
+  \item Message Gateway für SMS, Dimoco
+  \item Automotiv Steuergeräte für Scheinwerfer, ZKW
+\end{itemize}
+\end{block}
+
+\end{frame}
+
 \section{Overview}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -93,6 +130,52 @@ Datum & Raum \\
 \end{table}
 \end{frame}
 
+\begin{frame}{Themen}
+\begin{itemize}
+  \item Objekt-Orientieres Design
+  \item Einführung in C++
+  \item Clean Code
+  \item Unit Testing
+  \item Software Development Methodology
+  \item Coding Standards
+\end{itemize}
+\end{frame}
+
+\section{Einstufung}
+\begin{frame}[fragile]{Frage 1}
+Was ist der output von folgendem Code:
+\begin{lstlisting}
+for (int i = 0; i < 5; ++i)
+{
+  std::cout << i << std::endl;
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}{Frage 2}
+Was ist der Unterschied zwischen Stack und Heap? Wann wir welcher Speicher
+verwended? Wie wird eine Stack-Variable deklariert und wie eine Heap-Variable?
+\end{frame}
+
+\begin{frame}[fragile]{Frage 3}
+Was ist der Typ und der Wert des folgenden Ausdrucks?
+\begin{lstlisting}
+int x = 12;
+int y = 7;
+
+(x != 4) || (y == 2)
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Frage 4}
+Was ist der Inhalt der Variablen str und p?
+\begin{lstlisting}
+char str[20] = "Hello";
+char *const p = str;
+*p = 'M';
+\end{lstlisting}
+\end{frame}
+
 \part{Introduction}
 
 \section{Introduction}
@@ -100,14 +183,13 @@ Datum & Raum \\
 \subsection{Object-oriented programming}
 
 \begin{frame}{Pradigma}
-OOP is a programming pradigma
-
-Objects contain
+OOP is a programming paradigm
+\begin{block}{Objects contain}
 \begin{itemize}
 \item data (ak. attribute)
 \item code (ak. methods)
 \end{itemize}
-
+\end{block}
 \end{frame}
 
 \begin{frame}{OOP vs. Procedural}
@@ -140,21 +222,31 @@ An instance of a class. Gets created during runtime.
 
 \begin{frame}{Information hidding}
 Encapsulate data and hide the internal structure from caller. This allows
-changing the internal details without affecting 
+changing the internal details without affecting.
 \end{frame}
 
 \begin{frame}{Inheritance}
-Exentend or overwrite functionality of another class.
+Inheritance is when a class is based on another class, using the same
+implementation to maintain the same behavior.
+Such an inherited class is called a subclass of its parent class or super class.
+It is a mechanism for code reuse and to allow independent extensions of the
+original software via public classes and interfaces.
+ Often called a `Is-A-Relation`.
 \end{frame}
 
 \begin{frame}{Interface}
 Define a method without implementing it as an interface to be used by other
-classes.
+classes. \\
+A interface is often called `an abstract base class`.
 \end{frame}
 
 \begin{frame}{Polymorphism}
 \framesubtitle{aka Subtyping}
-Define a implementation for a specialized type.
+Polymorphism is the provision of a single interface to entities of different
+types.
+
+Define a implementation for a specialized type. Or change the behavior of a
+class by subtyping it and overwrite a method.
 \end{frame}
 
 \subsection{C++}
@@ -179,20 +271,36 @@ Define a implementation for a specialized type.
 \begin{frame}{C++ - Standardization}
 \itemize{}
 \item[1979] C with Classes first implemented 
-\item[1998] C++98 (ISO/IEC 14882:1998) 
+\item[1998] C++98 (ISO/IEC 14882:1998)
 \item[2003] C++03 (ISO/IEC 14882:2003)
 \item[2011] C++11 (ISO/IEC 14882:2011)
-\note[item]{C++11 major extension over C++03} 
 \item[2014] C++14 (ISO/IEC 14882:2014)
-\note[item]{C++14 small extension over C++11, featuring mainly bug fixes
- and small improvements}
 \item[2017] C++17 (also called C++1z)
+\end{frame}
+
+\begin{frame}{The Boost Library}
+\begin{itemize}
+  \item Started arround 1999
+  \item several Boost libraries have been accepted for incorporation into the
+  C++11 standard.
+\end{itemize}
 \end{frame}
 
 \begin{frame}{Emedded Systems}
 \begin{itemize}
   \item Embedded C++ (still in use?)
 \end{itemize}
+\end{frame}
+
+\section{Example}
+\begin{frame}
+\begin{itemize}
+  \item Create a `Hello World` application
+  \item Simple Calculator: Read two values and print sum
+  \item Animal sounds: Implement classes Dog, Cat and Cow and it's base-class
+  Animal, with a common makeSound() method.
+\end{itemize}
+
 \end{frame}
 
 \part{Buildsystem}
@@ -202,10 +310,7 @@ Define a implementation for a specialized type.
 \begin{frame}{Tools}
 \begin{description}
   \item[Code:Blocks] \url{http://www.codeblocks.org/}
-  \note[item]{Code:Blocks: IDE, Contains GCC compiler}
   \item[Git for Windows] \url{https://git-for-windows.github.io/}
-  \note[item]{Git for Windows: Git CLI (git.exe) used as back-end for
-  TortoiseGit}
   \item[TortoiseGit] \url{https://tortoisegit.org/}
   \item[CMake] \url{https://cmake.org/}  
 \end{description}
@@ -323,8 +428,11 @@ TODO
 \begin{frame}{Source}
 C++ Language Tutorial
 Source: \url{http://www.cplusplus.com/doc/tutorial/}
-\note{reference on cplusplus.com contains some errors,
-http://stackoverflow.com/questions/6520052/whats-wrong-with-cplusplus-com}
+\begin{block}
+
+reference on cplusplus.com contains some errors,
+\url{http://stackoverflow.com/questions/6520052/whats-wrong-with-cplusplus-com}
+\end{block}
 \end{frame}
 
 \section{Basics of C++}
@@ -336,7 +444,7 @@ TODO
 
 \subsection{Variables and types}
 \begin{frame}{Variables and types}
-TODOtodonotes
+TODO
 \end{frame}
 
 

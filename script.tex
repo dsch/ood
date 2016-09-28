@@ -293,16 +293,6 @@ class by subtyping it and overwrite a method.
 \end{itemize}
 \end{frame}
 
-\section{Example}
-\begin{frame}
-\begin{itemize}
-  \item Create a `Hello World` application
-  \item Simple Calculator: Read two values and print sum
-  \item Animal sounds: Implement classes Dog, Cat and Cow and it's base-class
-  Animal, with a common makeSound() method.
-\end{itemize}
-
-\end{frame}
 
 \part{Buildsystem}
 
@@ -345,7 +335,7 @@ Abstract class
 \end{frame}
 
 \begin{frame}{Composition and delegation}
-TODO
+% TODO Composition and delegation
 \end{frame}
 
 \begin{frame}{Polymorphism}
@@ -361,16 +351,10 @@ Virtual methods
 \end{frame}
 
 
-\subsection{Pattern}
-
-
-\frame{GRASP}
-
-\subsection{SOLID}
+\section{SOLID}
 
 \begin{frame}{S.O.L.I.D - Principals}
 Defined by Robert C. Martin (Oncle Bob)
-
 
 \begin{description}
 \item [S] Single-responsiblity principle
@@ -381,29 +365,145 @@ Defined by Robert C. Martin (Oncle Bob)
 \end{description}
 \end{frame}
 
-\begin{frame}{Single-responsiblity principle}
-a class should have only a single responsibility (i.e. only one potential change
-in the software's specification should be able to affect the specification of the class)
+\subsection{Single-responsiblity principle}
+
+\begin{frame}[fragile]{Single-responsiblity principle}
+''A class should have only a single responsibility.''
 \end{frame}
+
+\begin{frame}[fragile]{SRP - Example}
+\begin{lstlisting}[caption=SRP Anti-Example]
+class Report
+{
+  void collectData();
+  void print();
+};
+\end{lstlisting}
+
+\begin{block}{Reasons to change:}
+\begin{itemize}
+  \item The content of the report could change.
+  \item The report format chould change.
+\end{itemize}
+\end{block}
+\end{frame}
+
+
+\subsection{Open-closed principle}
 
 \begin{frame}{Open-closed principle}
-''A module should be open for extension but closed for modification''
+''Software entities (classes, modules, functions, etc.) should be open for
+extension, but closed for modification.'
 \end{frame}
+
+\begin{frame}[fragile]{OCP - Example}
+Adding an new class should lead to no or very little changes at the existing
+code.
+
+\begin{lstlisting}[caption=OCP Anti-Example]
+class Square {
+  float length;
+};
+
+class Circle {
+  float radius;
+};
+
+class AreaCalculator {
+  float area(const Square& square) {
+    return std::pow(square.length);
+  }
+  
+  float area(const Circle& circle) {
+    return std::pow(circle.radius) * M_PI;
+  }
+};
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{OCP - Example}
+\begin{lstlisting}[caption=OCP Example]
+class Shape {
+  virtual float area() = 0;
+};
+
+class Square : public Shape {
+  float length;
+  float area() {
+    return std::pow(this->length);
+  }
+};
+
+class Circle : public Shape {
+  float radius;
+  float area() {
+    return std::pow(this->radius) * M_PI;
+  }
+};
+
+class AreaCalculator {
+  float area(const Shape& shape) {
+    return shape.area();
+  }
+};
+\end{lstlisting}
+\end{frame}
+
+
+\subsection{Liskov substitution principle}
 
 \begin{frame}{Liskov substitution principle}
-''objects in a program should be replaceable with instances of their subtypes
-without altering the correctness of that program.''
+''Subtypes must be substitutable for their base types.''
 \end{frame}
 
-\begin{frame}{Interface segregation principle}
+\begin{frame}[fragile]{LSP - Example}
+\begin{lstlisting}[caption=LSP Example]
+class Vehicle {
+  virtual void startEngine() {
+    // Default engine start functionality
+  }
+};
+
+class Car : public Vehicle {
+  void startEngine() {
+    this->engageIgnition();
+    Vehicle::startEngine();
+  }
+
+  void engageIgnition() {
+    // Ignition procedure
+  }
+};
+\end{lstlisting}
+Example of LSP Violation: `Square is-a Rectangle`
 \end{frame}
+
+
+\subsection{Interface segregation principle}
+
+\begin{frame}{Interface segregation principle}
+''Many client specific interfaces are better than one general purpose
+interface''
+\end{frame}
+
+\begin{frame}{ISP - Example}
+% TODO ISP Example
+\end{frame}
+
+
+\subsection{Dependency Inversion Principle}
 
 \begin{frame}{Dependency Inversion Principle}
 \end{frame}
 
-\subsection{Clean Code}
+\section{Programming idiom}
+\frame{RAII - Resource Acquisition Is Initialization}
+
+\frame{PImpl - Pointer To Implementation}
+
+\section{Clean Code}
 \begin{frame}{Clean Code}
-TODO
+% TODO Clean Code
 \end{frame}
 
 \part{Object Oriented Design - Pattern}
@@ -440,12 +540,12 @@ reference on cplusplus.com contains some errors,
 
 \subsection{Structure of a program}
 \begin{frame}{Structure of a program}
-TODO
+% TODO Structure of a program
 \end{frame}
 
 \subsection{Variables and types}
 \begin{frame}{Variables and types}
-TODO
+% TODO Variables and types
 \end{frame}
 
 
@@ -1170,7 +1270,7 @@ We're talking about automated testing!
 
 \subsection{Design for testability}
 \begin{frame}{Design for testability}
-TODO
+% TODO
 \end{frame}
 
 \begin{frame}[fragile]{Unittesting in C}
@@ -1216,6 +1316,44 @@ team manage changes to source code over time
 \end{frame}
 
 \begin{frame}{Branch}
+\end{frame}
+
+\part{Examples}
+
+\section{Example 1}
+\begin{frame}{Example 1}
+\begin{itemize}
+  \item Create a `Hello World` application
+  \item Simple Calculator: Read two values and print sum
+  \item Animal sounds: Implement classes Dog, Cat and Cow and it's base-class
+  Animal, with a common makeSound() method.
+\end{itemize}
+\end{frame}
+
+\section{Example 2}
+
+\begin{frame}{Smart Pointer}
+\subtitle{}
+% TODO Smart Pointer example
+\end{frame}
+
+\section{Example 3}
+
+\begin{frame}{Container}
+\begin{itemize}
+  \item Singly Linked List
+  \item Doubly Linked List
+  \item Double Ended Queue
+  \item Dynamic Array
+  \item Stack (LIFO)
+  \item Queue (FIFO)
+\end{itemize}
+\end{frame}
+
+
+\section{Example x}
+\begin{frame}{Idioms}
+http://www.programming-idioms.org/
 \end{frame}
 
 \end{document}

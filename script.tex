@@ -494,10 +494,34 @@ interface''
 \subsection{Dependency Inversion Principle}
 
 \begin{frame}{Dependency Inversion Principle}
+Report class depends on DataCollection class by calling data-getters.
+
+If the DataCollection implements a ReportData interface and the Report uses only
+this, the two classes are decoupled.
 \end{frame}
 
 \section{Programming idiom}
-\frame{RAII - Resource Acquisition Is Initialization}
+\begin{frame}[fragile]{RAII - Resource Acquisition Is Initialization}
+Holding a resource is tied to object lifetime of the `resource handle`.
+\par
+Resource is allocated during handler construction and released during handler
+destruction.
+
+\begin{lstlisting}
+class FileHandle {
+  std::FILE* file;
+public:
+  FileHandle(const std::string& filename) {
+    file = std::fopen(filename.cstr(), "r");
+  }
+  
+  ~FileHandle() {
+    std::fclose(file);
+  }
+};
+\end{lstlisting}
+\end{frame}
+
 
 \frame{PImpl - Pointer To Implementation}
 
@@ -1020,7 +1044,7 @@ double operate(double a, double b)
 
 \begin{frame}[fragile]{Templates}
 \begin{lstlisting}[caption=Templates]
-template <class T>
+template <typename T>
 T sum(T a, T b)
 {
   return a + b;
@@ -1139,30 +1163,232 @@ int * q = nullptr;
 \end{frame}
 
 \subsection{Dynamic Memory}
-\begin{frame}{Dynamic Memory}
-new and delete
+\begin{frame}[fragile]{Dynamic Memory}
+\begin{itemize}
+  \item [new] Allocate new memory
+  \item [delete] Free allocated memory
+\end{itemize}
+\begin{lstlisting}
+int* i = new int;
+delete i;
+
+MyClass* list = new MyClass() [5];
+delete[] list
+\end{lstlisting}
 \end{frame}
 
 \subsection{Data structures}
-\begin{frame}{Data structures}
-struct
+\begin{frame}[fragile]{Data structures}
+\begin{lstlisting}
+struct Size {
+  int width;
+  int height;
+}
+
+Size rectangle;
+rectangle.width = 200;
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}{Default accessibility of members}
+\begin{itemize}
+  \item [struct] public
+  \item [class] private
+\end{itemize}
 \end{frame}
 
 \subsection{Other data types}
-\begin{frame}{Typedef}
-typedef
+\begin{frame}[fragile]{Type alias}
+\begin{lstlisting}[caption=type alias with typedef]
+typedef char C;
+typedef unsigned int WORD;
+typedef char * pChar;
+typedef char field [50];
+\end{lstlisting}
+
+\begin{lstlisting}[caption=type alias with using]
+using C = char;
+using WORD = unsigned int;
+using pChar = char *;
+using field = char [50];
+\end{lstlisting}
+
+Neither typedef nor using create new distinct data types. There won't improve
+type-safety.
+\end{frame}
+
+\begin{frame}[fragile]{Enumerated types}
+\begin{lstlisting}
+enum type_name {
+  value1,
+  value2,
+  value3,
+} object_names;
+\end{lstlisting}
+
+Because enumerated types declared with enum are implicitly convertible to int,
+and each of the enumerator values is actually of type int.They are the exact
+same value of the same type. The reasons for this are historical and are
+inheritance of the C language.
+\end{frame}
+
+\begin{frame}[fragile]{Enumerated types with enum class}
+\begin{lstlisting}
+enum class Colors {black, blue, green, cyan, red, purple, yellow, white};
+
+Colors mycolor;
+
+mycolor = Colors::blue;
+if (mycolor == Colors::green) mycolor = Colors::red; 
+\end{lstlisting}
 \end{frame}
 
 
 \section{Classes}
 \subsection{Classes}
-\begin{frame}{Classes}
+\begin{frame}{Classes}{access specifiers}
+\begin{itemize}
+  \item private members of a class are accessible only from within other members
+        of the same class (or from their "friends").
+  \item protected members are accessible from other members of the same class
+        (or from their "friends"), but also from members of their derived
+        classes.
+  \item public members are accessible from anywhere where the object is
+        visible.
+\end{itemize}
+
+By default, all members of a class have private access for all its members.
+\end{frame}
+
+\begin{frame}[fragile]{Constructor}
+A constructor is used to initalize the inner state of a class during creation.
+\begin{lstlisting}
+class Rectangle {
+    int width;
+    int height;
+  public:
+    Rectangle(int width, int height)
+    {
+      this->width = width;
+      this->height = height;
+    }
+
+    int area() {
+      return(width*height);
+    }
+};
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Overloading constructors}
+Like any other function, a constructor can also be overloaded.
+\begin{lstlisting}
+class Rectangle {
+    int width;
+    int height;
+  public:
+
+    Rectangle() {
+      width = 5;
+      height = 5;
+    }
+
+    Rectangle(int x, int y) : width(x), height(y)
+    {
+    }
+};
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}{Constructor - Special cases}
+Constructors have access specifiers. It's possible to create a class where the
+constructor isn't callable from outside.
+
+Constructors with a single non-default parameter should be declared with the explicit
+specifier. To prevent unintended implicit conversion or copy-initalization.
+\end{frame}
+
+\begin{frame}{Overloading operators}
+To extend the behavior of a newly create class operators can be overloaded.
+\includegraphics[scale=0.4]{img/OperatorOverload.png}
+\end{frame}
+
+\begin{frame}[fragile]{Example}
+\begin{lstlisting}
+class CVector {
+public:
+  int x;
+  int y;
+
+  CVector() {};
+
+  CVector(int a,int b) : x(a), y(b) {}
+
+  CVector operator+(const CVector& param) {
+    CVector temp;
+    temp.x = x + param.x;
+    temp.y = y + param.y;
+    return temp;
+  }
+};
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}{Static members}
+Static members are `class-members`. They don't belong to an object, but to the
+class. Therefore data in static member variables exists only once and static
+methods can't access object data.
+\end{frame}
+
+\begin{frame}[fragile]{Const member functions}
+When an object of a class is qualified as a const object, the access to its data
+members from outside the class is restricted to read-only. Methods have to be
+devlared as const to make them accessable. Marking all methods that don't modify
+the object as const is importent to allow to pass an object as const reference
+into a function.
+
+\begin{lstlisting}
+class MyClass {
+public:
+  int x;
+
+  MyClass(int val) : x(val) {}
+
+  int get() const {
+    return x;
+  }
+};
+
+const MyClass foo(10);
+int a = foo.x;
+int b = foo.get();
+\end{lstlisting}
 
 \end{frame}
 
 \subsection{Special members}
 \begin{frame}{Special members}
+\includegraphics[scale=0.4]{img/OperatorOverload.png}
+\end{frame}
 
+\begin{frame}{Default constructors}
+The default constructor is the constructor called when objects of a class are
+declared, but are not initialized with any arguments. If a class definition has
+no constructors, the compiler assumes the class to have an implicitly defined
+default constructor.
+\end{frame}
+
+\begin{frame}{Destructor}
+Destructors fulfill the opposite functionality of constructors: They are
+responsible for the necessary cleanup needed by a class when its lifetime ends.
+\end{frame}
+
+\subsection{Templates}
+
+\begin{frame}{Templates}
+Function templates
+Class templates
+Template specialization
 \end{frame}
 
 \subsection{Friendship and inheritance}
@@ -1334,7 +1560,17 @@ team manage changes to source code over time
 
 \begin{frame}{Smart Pointer}
 \subtitle{}
-% TODO Smart Pointer example
+Implement a `Smart Pointer` which handles object-live-time of a newly created
+object.
+\par
+Features:
+\begin{itemize}
+  \item allocate and free the memory
+  \item overload `pointer dereference` operator to access pointee members
+  \item implement assignment operator
+  \item implement copy operator (with reference counting)
+\end{itemize}
+
 \end{frame}
 
 \section{Example 3}

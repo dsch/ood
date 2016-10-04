@@ -317,39 +317,6 @@ Design is all about changable code.
 Code is written once, but read many times.
 \end{frame}
 
-\subsection{Features}
-
-\begin{frame}
-accessibility
-\end{frame}
-
-\begin{frame}{Encapsulation}
-abstraction
-information hidding
-hide internal details, which allows changing this details
-\end{frame}
-
-\begin{frame}{Inheritance}
-Base class
-Abstract class
-\end{frame}
-
-\begin{frame}{Composition and delegation}
-% TODO Composition and delegation
-\end{frame}
-
-\begin{frame}{Polymorphism}
-subtyping
-\end{frame}
-
-\begin{frame}{Open recursion}
-Virtual methods
-
-\lstinputlisting[caption=Open recursion]{lst/open_recursion.cpp}
-
-
-\end{frame}
-
 
 \section{SOLID}
 
@@ -1368,7 +1335,7 @@ int b = foo.get();
 
 \subsection{Special members}
 \begin{frame}{Special members}
-\includegraphics[scale=0.4]{img/OperatorOverload.png}
+\includegraphics[scale=0.4]{img/SpecialMembers.png}
 \end{frame}
 
 \begin{frame}{Default constructors}
@@ -1383,6 +1350,27 @@ Destructors fulfill the opposite functionality of constructors: They are
 responsible for the necessary cleanup needed by a class when its lifetime ends.
 \end{frame}
 
+\begin{frame}{Copy constructor}
+A copy constructor is a constructor whose first parameter is of type reference
+to the class itself (possibly const qualified) and which can be invoked with a
+single argument of this type. 
+\par
+If a class has no custom copy nor move constructors (or assignments) defined, an
+implicit copy constructor is provided. The definition assumed for this function
+performs a shallow copy. 
+\end{frame}
+
+\begin{frame}[fragile]{Copy assignment}
+Objects are not only copied on construction, when they are initialized: They can
+also be copied on any assignment operation.
+\begin{lstlisting}
+MyClass foo;
+MyClass bar (foo);  // object init: copy constructor called
+MyClass baz = foo;  // object init: copy constructor called
+foo = bar;  // object already init: copy assignment called
+\end{lstlisting}
+\end{frame}
+
 \subsection{Templates}
 
 \begin{frame}{Templates}
@@ -1391,40 +1379,110 @@ Class templates
 Template specialization
 \end{frame}
 
-\subsection{Friendship and inheritance}
-\begin{frame}{Friendship and inheritance}
-public
-private
-friend
-\end{frame}
-
-\subsection{Polymorphism}
-\begin{frame}{Polymorphism}
-
-\end{frame}
-
-
 \section{Other language features}
 \subsection{Type conversions}
-\begin{frame}{Type conversions}
+\begin{frame}[fragile]{Implicit conversion}
+Implicit conversions are automatically performed when a value is copied to a
+compatible type.
+\begin{lstlisting}
+short a=2000;
+int b;
+b=a;
+\end{lstlisting}
+\end{frame}
 
+\begin{frame}{Implicit conversions with classes}
+In the world of classes, implicit conversions can be controlled by means of three member functions:
+\begin{itemize}
+  \item Single-argument constructors: allow implicit conversion from a
+  particular type to initialize an object.
+  \item Assignment operator: allow implicit conversion from a particular type on
+  assignments.
+  \item Type-cast operator: allow implicit conversion to a particular type.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Keyword explicit}
+On a function call, C++ allows one implicit conversion to happen for each
+argument. This may be somewhat problematic for classes, because it is not always
+what is intended. But, it can be prevented by marking the affected constructor
+with the explicit keyword.
+
+Type-cast member functions can also be specified as explicit. This prevents
+implicit conversions in the same way as explicit-specified constructors do for
+the destination type.
+\end{frame}
+
+\begin{frame}[fragile]{Type casting}
+C++ is a strong-typed language. Many conversions, specially those that imply a
+different interpretation of the value, require an explicit conversion, known in
+C++ as type-casting. There exist two main syntaxes for generic type-casting:
+functional and c-like:
+\begin{lstlisting}
+double x = 10.3;
+int y;
+y = int (x);  // functional notation
+y = (int) x;  // c-like cast notation
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}{dynamic\_cast}
+dynamic\_cast can only be used with pointers and references to classes
+(or with void*). Its purpose is to ensure that the result of the type conversion points
+to a valid complete object of the destination pointer type.
+
+When dynamic\_cast cannot cast a pointer because it is not a complete object of
+the required class it returns a null pointer to indicate the failure.
+\end{frame}
+
+\begin{frame}{static\_cast}
+static\_cast can perform conversions between pointers to related classes, not
+only upcasts (from pointer-to-derived to pointer-to-base), but also downcasts
+(from pointer-to-base to pointer-to-derived). No checks are performed during
+runtime to guarantee that the object being converted is in fact a full object of
+the destination type.
+\end{frame}
+
+\begin{frame}{reinterpret\_cast}
+reinterpret\_cast converts any pointer type to any other pointer type, even of
+unrelated classes. The operation result is a simple binary copy of the value
+from one pointer to the other. All pointer conversions are allowed: neither the
+content pointed nor the pointer type itself is checked.
+\end{frame}
+
+\begin{frame}[fragile]{const\_cast}
+This type of casting manipulates the constness of the object pointed by a
+pointer, either to be set or to be removed. For example, in order to pass a
+const pointer to a function that expects a non-const argument:
+\begin{lstlisting}
+void print(char * str)
+{
+  cout << str << '\n';
+}
+
+int main() {
+  const char* c = "sample text";
+  print(const_cast<char *>(c));
+  return 0;
+}
+\end{lstlisting}
 \end{frame}
 
 \subsection{Exceptions}
 \begin{frame}{Exceptions}
-
+% TODO Exceptions
 \end{frame}
 
 \subsection{Preprocessor directives}
 \begin{frame}{Preprocessor directives}
-
+% TODO Preprocessor directives
 \end{frame}
 
 
 \part{C++ and C}
 \section{C++ and C}
-\begin{frame}
-
+\begin{frame}{C++ and C}
+% TODO C++ and C
 \end{frame}
 
 

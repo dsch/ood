@@ -203,8 +203,6 @@ data tends to be highly decoupled from the functions that operate on it
 data tends to carry with it a collection of functions
 \end{block}
 
-\footfullcite{Stackoverflow1}
-
 \end{frame}
 
 \subsection{Object-oriented concepts}
@@ -349,9 +347,9 @@ No rule without exception!
 \end{frame}
 
 
-\part{OO-Basics}
+\part{Object Oriented Design}
 
-\section{OO-Basics}
+\section{Basics}
 
 \begin{frame}
 Design is all about changable code.
@@ -437,22 +435,16 @@ class Shape {
 
 class Square : public Shape {
   float length;
-  float area() {
-    return std::pow(this->length);
-  }
+  float area() { return std::pow(this->length); }
 };
 
 class Circle : public Shape {
   float radius;
-  float area() {
-    return std::pow(this->radius) * M_PI;
-  }
+  float area() { return std::pow(this->radius) * M_PI; }
 };
 
 class AreaCalculator {
-  float area(const Shape& shape) {
-    return shape.area();
-  }
+  float area(const Shape& shape) { return shape.area(); }
 };
 \end{lstlisting}
 \end{frame}
@@ -538,22 +530,55 @@ public:
 % TODO Clean Code
 \end{frame}
 
-\part{Object Oriented Design - Pattern}
-\section{Object Oriented Design - Pattern}
+\section{Pattern}
 
-\begin{frame}{Pattern}
+\begin{frame}{Creational Patterns}
 \begin{itemize}
-  \item singelton
-  \item factory
-  \item command
-  \item observer
-  \item strategy
-  \item visitor
-  \item null object
-  \item adapter
-  \item proxy
-  \item fly-weight
+  \item Abstract Factory
+  \item Builder
+  \item Factory Method
+  \item Prototype
+  \item Singleton
 \end{itemize}
+\end{frame}
+
+\begin{frame}{Structural Patterns}
+\begin{itemize}
+  \item Adapter
+  \item Bridge
+  \item Composite
+  \item Decorator
+  \item Façade
+  \item Flyweight
+  \item Proxy
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Behavioral Patterns}
+\begin{itemize}
+  \item Chain of Responsibility
+  \item Command
+  \item Interpreter
+  \item Iterator
+  \item Mediator
+  \item Memento
+  \item Observer
+  \item State
+  \item Strategy
+  \item Template Method
+  \item Visitor
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Build}
+Separate the construction of a complex object from its representation so that
+the same construction process can create different representations.
+\end{frame}
+
+\begin{frame}{Adapter aka Wrapper}
+Convert the interface of a class into another interface clients expect. Adapter
+lets classes work together that couldn't otherwise because of incompatible
+interfaces.
 \end{frame}
 
 \part{C++ Tutorial}{cpp-tutorial}
@@ -1625,7 +1650,6 @@ add_test(NAME MyModule COMMAND TestMyModule)
 \begin{block}{What is version control}
 Version control systems are a category of software tools that help a software
 team manage changes to source code over time
-\cite{AtlassianGitTutorials}
 \end{block}
 \end{frame}
 
@@ -1646,8 +1670,8 @@ team manage changes to source code over time
 
 \part{Examples}
 
-\section{Example 1}
-\begin{frame}{Example 1}
+\section{Exercise 1}
+\begin{frame}{Hello World}
 \begin{itemize}
   \item Create a `Hello World` application
   \item Simple Calculator: Read two values and print sum
@@ -1656,7 +1680,7 @@ team manage changes to source code over time
 \end{itemize}
 \end{frame}
 
-\section{Example 2}
+\section{Exercise 2}
 
 \begin{frame}{Smart Pointer}
 \subtitle{}
@@ -1673,7 +1697,68 @@ Features:
 
 \end{frame}
 
-\section{Example 3}
+\section{Exercise 3}
+
+\begin{frame}[fragile]{String builder - Background}
+Appending to std::string seams a very easy task, but is't very expensiv
+regarding performance.
+
+\begin{lstlisting}
+std::string text_document;
+for (int i=0; i<1000; i++) {
+  text_document += line[i];
+}
+\end{lstlisting}
+
+Every call to append string leads to a new memory allocation and a copy
+of the whole string into the new object.
+\end{frame}
+
+\begin{frame}[fragile]{String builder - Exercise}
+Use the builder pattern to optimize the `expensive` operation of appending text
+to an existing string. Use an intermediat buffer to store the string during
+creation. Provide functionality to convert the builder object after complete
+build into a std::string.
+
+\begin{lstlisting}
+StringBuilder str_builder;
+
+for (int i=0; i<1000; i++) {
+  str_builder.append("abc");
+  // better: str_builder += "abc";
+}
+
+std::string str = str_builder.toString()
+// better: std::string str = str_builder
+\end{lstlisting}
+
+\end{frame}
+
+\section{Exercise 4}
+\begin{frame}[fragile]{Sort adapter}
+
+Create an adapter to use std::sort and std::qsort although they have diverent
+interfaces.
+
+\begin{lstlisting}
+
+template <typename T>
+class Sorter {
+  virtual void operator(T sequence_container) = 0;
+}
+
+std::vector seq = {3, 5, 2, 7, 1};
+
+StdlibSorter stdlib_sort;
+stdlib_sort(seq);
+
+AlgoSorter algo_sort;
+algo_sort(seq);
+\end{lstlisting}
+
+\end{frame}
+
+\section{Exercise x}
 
 \begin{frame}{Container}
 \begin{itemize}
@@ -1684,12 +1769,6 @@ Features:
   \item Stack (LIFO)
   \item Queue (FIFO)
 \end{itemize}
-\end{frame}
-
-
-\section{Example x}
-\begin{frame}{Idioms}
-http://www.programming-idioms.org/
 \end{frame}
 
 \end{document}

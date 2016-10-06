@@ -294,7 +294,48 @@ class by subtyping it and overwrite a method.
 \end{frame}
 
 
-\part{Buildsystem}
+\part{Project organisation}
+
+\section{Organising code in C++}
+
+\begin{frame}{Why bother with organisation?}
+\begin{itemize}
+  \item speed up compiling time
+  \item reduce build dependencies
+  \item avoid name clashes
+  \item better code management
+  \item improves collaborative work
+\end{itemize}
+\end{frame}
+
+\begin{frame}{One definition rule}
+\begin{enumerate}
+  \item In any translation unit, a template, type, function or object can have
+  no more than one definition.
+  \item In the entire program, an object or non-inline function cannot have more
+  than one definition.
+  \item Some things, like types, templates, and extern inline functions, can be
+  defined in more than one translation unit.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Header vs. Source-Files}
+\begin{itemize}
+  \item [Header] Declarations
+  \item [Source] Implementations 
+\end{itemize}
+A function defined entirely inside a class definition is implicitly an inline
+function.
+\end{frame}
+
+\begin{frame}{Code organisation}
+\begin{itemize}
+  \item Each class in it's own file
+  \item Each namespace in it's own directory
+\end{itemize}
+No rule without exception!
+\end{frame}
+
 
 \section{Buildsystem}
 \subsection{Tools}
@@ -305,8 +346,8 @@ class by subtyping it and overwrite a method.
   \item[TortoiseGit] \url{https://tortoisegit.org/}
   \item[CMake] \url{https://cmake.org/}  
 \end{description}
-
 \end{frame}
+
 
 \part{OO-Basics}
 
@@ -1476,6 +1517,7 @@ int main() {
 \subsection{Preprocessor directives}
 \begin{frame}{Preprocessor directives}
 % TODO Preprocessor directives
+include user header vs. include system header
 \end{frame}
 
 

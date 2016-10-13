@@ -14,6 +14,8 @@
         commentstyle=\color{green},
         frame=single,
         showspaces=false,
+        showstringspaces=false,
+        morekeywords={noexcept},
         }
 
 \lstdefinelanguage{cmake}
@@ -141,6 +143,27 @@ Datum & Raum \\
   \item Coding Standards
 \end{itemize}
 \end{frame}
+
+\begin{frame}{Benotung}
+\begin{itemize}
+  \item Schriftliche Prüfung (100 Punkte)
+  \item Übung: Ideom (20 Punkte)
+  \item Projektarbeit (30 Punkte)
+\end{itemize}
+Für eine positive Beurteilung sind insgesamt 90 Punkte erforderlich.
+\end{frame}
+
+%\begin{frame}{Gegrüfte Themen}
+%\begin{itemize}
+%  \item C++ Tutorial
+%  \item Pattern (Factory Method, Builder, Singleton, Command, Observer,
+%  Visitor)
+%  \item SOLID
+%  \item Testing
+%  \item Code Smells
+%  \item Coding Standards
+%\end{itemize}
+%\end{frame}
 
 \section{Einstufung}
 \begin{frame}[fragile]{Frage 1}
@@ -1536,13 +1559,101 @@ int main() {
 
 \subsection{Exceptions}
 \begin{frame}{Exceptions}
-% TODO Exceptions
+Exceptions provide a way to react to exceptional circumstances (like runtime
+errors) in programs by transferring control to special functions called
+handlers. 
+\end{frame}
+
+\begin{frame}[fragile]{Exceptions}
+\begin{lstlisting}
+#include <iostream>
+
+int main () {
+  try
+  {
+    throw 20;
+  }
+  catch (int e)
+  {
+    std::cout << "An exception occurred. "
+                 "Exception Nr. " << e << std::endl;
+  }
+  return 0;
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Exceptions}
+If an ellipsis (...) is used as the parameter of catch, that handler will catch
+any exception no matter what the type of the exception thrown. This can be used
+as a default handler that catches all exceptions not caught by other handlers:
+\begin{lstlisting}
+try {
+  // code here
+}
+catch (int param) { std::cout << "int exception"; }
+catch (char param) { std::cout << "char exception"; }
+catch (...) { std::cout << "default exception"; }
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Standard exceptions}
+\begin{lstlisting}
+class exception {
+public:
+  exception () noexcept;
+  exception (const exception&) noexcept;
+  exception& operator= (const exception&) noexcept;
+  virtual ~exception();
+  virtual const char* what() const noexcept;
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}{Exceptions thrown by components of the C++ Standard library}
+\begin{table}
+\begin{tabular}{l | l }
+Exception & Description \\
+\hline
+bad\_alloc & thrown by new on allocation failure \\
+bad\_cast & thrown by dynamic\_cast when it fails in a dynamic cast \\
+bad\_exception & thrown by certain dynamic exception specifiers \\
+bad\_typeid & thrown by typeid \\
+bad\_function\_call & thrown by empty function objects \\
+bad\_weak\_ptr & thrown by shared\_ptr when passed a bad weak\_ptr
+\end{tabular}
+\end{table}
+\end{frame}
+
+\begin{frame}{Base types for custom exceptions}
+Generic exception types that can be inherited by custom exceptions to report
+errors.
+\begin{table}
+\begin{tabular}{l | l }
+Exception & Description \\
+\hline
+logic\_error & error related to the internal logic of the program \\
+runtime\_error & error detected during runtime
+\end{tabular}
+\end{table}
 \end{frame}
 
 \subsection{Preprocessor directives}
 \begin{frame}{Preprocessor directives}
-% TODO Preprocessor directives
-include user header vs. include system header
+\begin{itemize}
+  \item macro definitions (\#define, \#undef)
+  \item Conditional inclusions (\#ifdef, \#ifndef, \#if, \#endif, \#else and \#elif)
+  \item Line control (\#line)
+  \item Error directive (\#error)
+  \item Source file inclusion (\#include)
+  \item Pragma directive (\#pragma)
+\end{itemize}
+\end{frame}
+
+\section{Quirks}
+
+\begin{frame}{Most vexing parse}
+% TOOD Most vexing parse
 \end{frame}
 
 
@@ -1621,7 +1732,7 @@ We're talking about automated testing!
 
 \subsection{Design for testability}
 \begin{frame}{Design for testability}
-% TODO
+% TODO Design for testability
 \end{frame}
 
 \begin{frame}[fragile]{Unittesting in C}
@@ -1728,8 +1839,8 @@ for (int i=0; i<1000; i++) {
   // better: str_builder += "abc";
 }
 
-std::string str = str_builder.toString()
-// better: std::string str = str_builder
+std::string str = str_builder.toString();
+// better: std::string str = str_builder;
 \end{lstlisting}
 
 \end{frame}
@@ -1741,7 +1852,6 @@ Create an adapter to use std::sort and std::qsort although they have diverent
 interfaces.
 
 \begin{lstlisting}
-
 template <typename T>
 class Sorter {
   virtual void operator(T sequence_container) = 0;

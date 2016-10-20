@@ -1679,6 +1679,50 @@ runtime\_error & error detected during runtime
 
 
 \part{Testing}
+
+\section{Software Development Process}
+
+\subsection{Models}
+
+\begin{frame}{Waterfall Model}
+\includegraphics[scale=0.3]{img/Waterfall.png}
+\end{frame}
+
+\begin{frame}{Waterfall - Overview}
+\begin{enumerate}
+  \item System and software requirements: Resulting in product requirements
+  \item Analysis: Resulting in models, schema, business rules
+  \item Design: Resulting in  the software architecure
+  \item Construction: the development, proving, and integration of software
+  \item Testing: the systematic discovery and fixing of defects
+  \item Maintainance of complete systems
+\end{enumerate}
+Move to a phase only when its preceding phase is reviewed and verified.
+\end{frame}
+
+\begin{frame}{Waterfall}
+\begin{itemize}
+  \item Places emphasis on documentation
+  \item A problem found in the early stages is cheaper to fix
+  \item The model provides a structured approach
+  \item Requirement changes leads to big redesign
+  \item It's hard to do the design for a new problem right
+\end{itemize}
+\end{frame}
+
+\begin{frame}{V-Model}
+\includegraphics[scale=0.4]{img/VModel.png}
+\end{frame}
+
+\begin{frame}{Agile}
+\begin{itemize}
+  \item \textbf{Individuals and interactions} over processes and tools 
+  \item \textbf{Working software} over comprehensive documentation
+  \item \textbf{Customer collaboration} over contract negotiation
+  \item \textbf{Responding to change} over following a plan
+\end{itemize}
+\end{frame}
+
 \section{Testing}
 \begin{frame}{Testing}
 We're talking about automated testing!
@@ -1707,17 +1751,28 @@ We're talking about automated testing!
 \begin{frame}{Unit test}
 \begin{itemize}
   \item Test the behavior of one single translation unit
+  \item Test only the public interface
+  \item If you think a implementation detail should be tested, then it's perhaps
+    it's own unit
 \end{itemize}
 \end{frame}
 
-\subsection{Unit testing}
-\begin{frame}{Unit testing}
-\begin{itemize}
-  \item Test only the public interface
-  \item If you think a implementation detail should be tested, then it's perhaps
-  an own unit
-\end{itemize}
+\subsection{Design for testability}
+\begin{frame}{Design for testability}
+\begin{exampleblock}{}
+  {\large ``Code that isn't tested doesn't work - this seems to be the safe
+  assumption.''}
+  \vskip5mm
+  \hspace*\fill{\small--- Kent Beck}
+\end{exampleblock}
 \end{frame}
+
+\begin{frame}
+Architectural and design decisions in order to enable us to easily and
+effectively test our system.
+\end{frame}
+
+\subsection{Unit testing}
 
 \begin{frame}{A good test}
 \begin{itemize}
@@ -1730,9 +1785,12 @@ We're talking about automated testing!
 \end{itemize}
 \end{frame}
 
-\subsection{Design for testability}
-\begin{frame}{Design for testability}
-% TODO Design for testability
+\begin{frame}{3 A's}
+\begin{itemize}
+  \item Arange
+  \item Act
+  \item Assert
+\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]{Unittesting in C}

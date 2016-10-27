@@ -147,8 +147,8 @@ Datum & Raum \\
 \begin{frame}{Benotung}
 \begin{itemize}
   \item Schriftliche Prüfung (100 Punkte)
-  \item Übung: Ideom (20 Punkte)
-  \item Projektarbeit (30 Punkte)
+  \item Übung: Programming Idiom (20 Punkte)
+  \item Projektarbeit (Linked-List) (30 Punkte)
 \end{itemize}
 Für eine positive Beurteilung sind insgesamt 90 Punkte erforderlich.
 \end{frame}
@@ -1657,6 +1657,113 @@ runtime\_error & error detected during runtime
 \end{frame}
 
 
+\part{Generic Programming}
+
+\section{Templates}
+\begin{frame}{Templates}
+\begin{itemize}
+  \item class template
+  \item function template
+  \item alias template (since C++11)
+  \item variable template (since C++14)
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{class template}
+\begin{lstlisting}
+template <typename T, int size>
+class Array
+{
+  T data[size]
+};
+
+Array<int, 5> numbers;
+Array<char, 10> string;
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{function template}
+\begin{lstlisting}
+template <typename T>
+T max(T value1, T value2)
+{
+  if (value1 >= value2)
+  {
+    return value1;
+  }
+  else
+  {
+    return value2;
+  }
+}
+
+max(5, 8);
+max(3.2, 8.7);
+\end{lstlisting}
+\end{frame}
+
+\subsection{Template specialisation}
+\begin{frame}{Full/Partial specialisation}
+Any of the following can be fully specialized:
+\begin{itemize}
+  \item function template
+  \item class template 
+  \item member function of a class template
+  \item static data member of a class template
+  \item member class of a class template
+  \item member enumeration of a class template
+  \item member class template of a class or class template
+  \item member function template of a class or class template
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{function template}
+\begin{lstlisting}
+template <typename T>
+T max(T value1, T value2);
+
+template <>
+bool max(bool value1, bool value2)
+{
+  return value1 || value2; 
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{class template}
+\begin{lstlisting}
+template <typename T, int size>
+class Array;
+
+template <int size>
+class Array<bool, size>
+{
+  bool data[(size+7)/8];
+};
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Partial specialisation}
+\begin{lstlisting}
+template <typename T>
+bool max(T value1, T value2);
+
+template <typename T>
+T* max(T* value1, T* value2)
+{
+  if (*value1 <= *value2)
+  {
+    return value1;
+  } 
+  else
+  {
+    return value2;
+  }
+}
+
+\end{lstlisting}
+\end{frame}
+
 \part{C++ and C}
 \section{C++ and C}
 \begin{frame}{C++ and C}
@@ -1763,6 +1870,7 @@ We're talking about automated testing!
   {\large ``Code that isn't tested doesn't work - this seems to be the safe
   assumption.''}
   \vskip5mm
+  
   \hspace*\fill{\small--- Kent Beck}
 \end{exampleblock}
 \end{frame}

@@ -545,14 +545,6 @@ public:
 \end{lstlisting}
 \end{frame}
 
-
-\frame{PImpl - Pointer To Implementation}
-
-\section{Clean Code}
-\begin{frame}{Clean Code}
-% TODO Clean Code
-\end{frame}
-
 \section{Pattern}
 
 \begin{frame}{Creational Patterns}
@@ -614,18 +606,6 @@ Source: \url{http://www.cplusplus.com/doc/tutorial/}
 reference on cplusplus.com contains some errors,
 \url{http://stackoverflow.com/questions/6520052/whats-wrong-with-cplusplus-com}
 \end{block}
-\end{frame}
-
-\section{Basics of C++}
-
-\subsection{Structure of a program}
-\begin{frame}{Structure of a program}
-% TODO Structure of a program
-\end{frame}
-
-\subsection{Variables and types}
-\begin{frame}{Variables and types}
-% TODO Variables and types
 \end{frame}
 
 
@@ -1776,7 +1756,136 @@ T* max(T* value1, T* value2)
 \url{https://simpleprogrammer.com/2015/04/13/why-comments-are-stupid-a-real-example/}
 \end{frame}
 
-\section{Clean Code}
+\begin{frame}
+\includegraphics[scale=0.25]{img/CleanCode.png}
+\end{frame}
+
+\begin{frame}
+\includegraphics[scale=0.25]{img/wtfm.png}
+\end{frame}
+
+\section{Meaningful Names}
+
+\begin{frame}{Meaningful Names}
+\begin{exampleblock}{}
+  \begin{large}
+  ''There are only two hard things in Computer Science: cache
+  invalidation and naming things.''
+  \end{large}
+  \vskip5mm
+  \hspace*\fill{\small--- Phil Karlton}
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}[fragile]{Use Intention-Revealing Names}
+\begin{lstlisting}
+int d; // elapsed time in days
+\end{lstlisting}
+
+\begin{lstlisting}
+int elapsedTimeInDays;
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}{Avoid Disinformation}
+\begin{itemize}
+  \item Avoid leaving false clues that obscure the meaning of code
+  \item Beware of using names which vary in small ways
+  \item Use one terminology: Spelling similar concepts similarly
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Make Meaningful Distinctions}
+If names must be different, then they should also mean something different.
+
+Noise words are redundant.
+\end{frame}
+
+\begin{frame}[fragile]{Use Pronounceable Names}
+Words are, by definition, pronounceable. It would be a shame not to take advantage of that huge portion of our brains that has evolved to deal with spoken lan-
+guage. So make your names pronounceable.
+
+\begin{lstlisting}
+class DtaRcrd102 {
+  Date genymdhms;
+  Date modymdhms;
+  const String pszqint = "102";
+/* ... */
+};
+\end{lstlisting}
+
+\begin{lstlisting}
+class Customer {
+  Date generationTimestamp;
+  Date modificationTimestamp;
+  const String recordId = "102";
+/* ... */
+};
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}{Use Searchable Names}
+Single-letter names and numeric constants have a particular problem in that they are not
+easy to locate across a body of text.
+\end{frame}
+
+\begin{frame}{Avoid Encodings}
+\begin{itemize}
+  \item Hungarian Notation
+  \item Member Prefixes
+  \item Interfaces and Implementations
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Avoid Mental Mapping}
+Readers shouldn’t have to mentally translate your names into other names they
+already know. This problem generally arises from a choice to use neither problem
+domain terms nor solution domain terms.
+\end{frame}
+
+\begin{frame}[fragile]{Class Names}
+Classes and objects should have noun or noun phrase names like
+\lstinline{Customer}, \lstinline{WikiPage}, \lstinline{Account}, and
+\lstinline{AddressParser}. Avoid words like \lstinline{Manager},
+\lstinline{Processor}, \lstinline{Data}, or \lstinline{Info} in the name of a
+class. A class name should not be a verb.
+\end{frame}
+
+\begin{frame}[fragile]{Method Names}
+Methods should have verb or verb phrase names like \lstinline{postPayment},
+\lstinline{deletePage}, or \lstinline{save}. Accessors, mutators, and predicates
+should be named for their value and prefixed with \lstinline{get},
+\lstinline{set} and \lstinline{is}.
+
+
+When constructors are overloaded, use static factory methods with names that
+describe the arguments. For example,
+\begin{lstlisting}
+Complex* fulcrumPoint = Complex::FromRealNumber(23.0);
+\end{lstlisting}
+is generally better than
+\begin{lstlisting}
+Complex* fulcrumPoint = new Complex(23.0);
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}{Pick One Word per Concept}
+Pick one word for one abstract concept and stick with it. For instance, it’s
+confusing to have \lstinline{fetch}, \lstinline{retrieve}, and \lstinline{get}
+as equivalent methods of different classes.
+\end{frame}
+
+\begin{frame}{Separating Solution and Problem Domain}
+Separating solution and problem domain concepts is part of the job of a good
+programmer and designer. The code that has more to do with problem domain
+concepts should have names drawn from the problem domain.
+\end{frame}
+
+\begin{frame}{Add Meaningful Context}
+Place names in context for your reader by enclosing them in well-named classes,
+functions, or namespaces. When all else fails, then prefixing the name may be
+necessary as a last resort. 
+\end{frame}
 
 \section{Code Smells}
 \begin{frame}
@@ -2206,30 +2315,6 @@ add_test(NAME MyModule COMMAND TestMyModule)
 \end{enumerate}
 \end{frame}
 
-\part{Version control}
-\section{Version control}
-
-\begin{frame}{Version control}
-\begin{block}{What is version control}
-Version control systems are a category of software tools that help a software
-team manage changes to source code over time
-\end{block}
-\end{frame}
-
-\section{Git - A Distributed Version Control System}
-\begin{frame}{Pro Git Book}
-\url{https://git-scm.com/book}
-\end{frame}
-
-\section{Workflow}
-\begin{frame}{Status}
-\end{frame}
-
-\begin{frame}{Commit}
-\end{frame}
-
-\begin{frame}{Branch}
-\end{frame}
 
 \part{Examples}
 

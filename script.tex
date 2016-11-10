@@ -1063,6 +1063,63 @@ std::string concatenate(const std::string& a,
 \lstinputlisting[caption=Default value example]{lst/DefaultValue.cpp}
 \end{frame}
 
+\begin{frame}[fragile]{Lvalue reference declarator}
+Syntax: \lstinline{S& d;}
+\begin{itemize}
+  \item Lvalue references can be used to alias an existing object (optionally
+  with different cv-qualification).
+  \item They can also be used to implement pass-by-reference semantics in
+  function calls.
+\end{itemize}
+\begin{lstlisting}
+   std::string s = "Ex";
+   std::string& r1 = s;
+   const std::string& r2 = s;
+ 
+   r1 += "ample";           // modifies s
+// r2 += "!";               // error: cannot modify through reference to const
+   std::cout << r2 << '\n'; // prints s, which now holds "Example"
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Rvalue reference declarator}
+Syntax: \lstinline{S&& d;}
+\begin{itemize}
+  \item Rvalue references can be used to extend the lifetimes of temporary
+  objects.
+  \item More importantly, when a function has both rvalue reference and lvalue
+  reference overloads, the rvalue reference overload binds to rvalues, while the
+  lvalue reference overload binds to lvalues. 
+\end{itemize}
+
+\begin{lstlisting}
+   std::string s1 = "Test";
+// std::string&& r1 = s1;           // error: can't bind to lvalue
+ 
+   const std::string& r2 = s1 + s1; // okay: lvalue reference to const extends lifetime
+// r2 += "Test";                    // error: can't modify through reference to const
+ 
+   std::string&& r3 = s1 + s1;      // okay: rvalue reference extends lifetime
+   r3 += "Test";                    // okay: can modify through reference to non-const
+   std::cout << r3 << '\n';
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Dangling references}
+\begin{lstlisting}
+std::string& f()
+{
+    std::string s = "Example";
+    return s; // exits the scope of s:
+              // its destructor is called and its storage deallocated
+}
+ 
+std::string& r = f(); // dangling reference
+std::cout << r;       // undefined behavior: reads from a dangling reference
+std::string s = f();  // undefined behavior: copy-initializes from a dangling reference
+\end{lstlisting}
+\end{frame}
+
 \subsection{Overloads and templates}
 \begin{frame}[fragile]{Overloaded functions}
 \begin{lstlisting}[caption=Overloaded functions]

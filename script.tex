@@ -146,11 +146,11 @@ Datum & Raum \\
 
 \begin{frame}{Benotung}
 \begin{itemize}
-  \item Schriftliche Prüfung (100 Punkte)
-  \item Übung: Programming Idiom (20 Punkte)
-  \item Projektarbeit (Linked-List) (30 Punkte)
+  \item Schriftliche Prüfung (60 Punkte)
+  \item Übung: Programming Idiom (30 Punkte)
+  \item Projektarbeit (Linked-List) (60 Punkte)
 \end{itemize}
-Für eine positive Beurteilung sind insgesamt 90 Punkte erforderlich.
+Für eine positive Beurteilung sind insgesamt 80 Punkte erforderlich.
 \end{frame}
 
 %\begin{frame}{Gegrüfte Themen}
@@ -2174,9 +2174,187 @@ Two classes perform identical functions but have different method names.
 
 
 \part{Coding Standards}
-\section{MISRA}
-\begin{frame}
 
+\begin{frame}{Coding Standards}
+\begin{itemize}
+  \item Roughly 80\% of software defects when using the C or C++ language, are
+  attributable to the incorrect usage of 20\% of the language constructs
+  \item If the usage of the language can be restricted to avoid this subset that
+  is known to be problematic, then the quality of the ensuing software is going
+  to greatly increase
+\end{itemize}
+\begin{center}
+\huge If you don’t want defects in your code, then don’t put them there!
+\end{center}
+\end{frame}
+
+\begin{frame}{Keep It Simple}
+\begin{itemize}
+  \item It is easy to write code that is difficult to read
+  \item Prevent developers from writing `clever` code
+  \item Write code that is easy to understand, easy to maintain and easy to test
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Clever Code}
+\begin{lstlisting}
+void clever_copy(char* to, const char* from, int count)
+{
+  int n = (count + 7) / 8;
+  switch (count % 8 ) {
+  case 0: do { *to++ = *from++;
+  case 7:      *to++ = *from++;
+  case 6:      *to++ = *from++;
+  case 5:      *to++ = *from++;
+  case 4:      *to++ = *from++;
+  case 3:      *to++ = *from++;
+  case 2:      *to++ = *from++;
+  case 1:      *to++ = *from++;
+             } while (--n > 0);
+  }
+}
+\end{lstlisting}
+
+\begin{lstlisting}
+void clever_copy(char* to, const char* from, int count)
+{
+  for (int n = 0; n < count; ++n)
+  {
+    *to++ = *from++; 
+  }
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}{Style guidelines}
+\begin{itemize}
+  \item Tools can be used to verify coding standards, but there is always a need
+  for some manual code review
+  \item Style guidelines ensure that the code is always written in the same
+  style, facilitating code reviews 
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Coding Standards can be made up of}
+\begin{itemize}
+  \item \normalsize Common sense rules \\ \tiny Don’t mix signed and unsigned
+  types
+  \item \normalsize Reduced language subset \\ \tiny Ensure that 'goto' or
+  'malloc' is not used
+  \item \normalsize Style guidelines \\ \tiny Ensure that braces are consistent
+  placed
+  \item \normalsize Naming conventions \\ \tiny Ensure that all public functions
+  start with filename\_
+  \item \normalsize Quality \& complexity metrics \\ \tiny Ensure that all
+  functions have a low cyclomatic complexity
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Automation}
+\begin{itemize}
+  \item Use of tools for automation of standards can greatly improve the
+  efficiency of their application
+  \item Over time engineers will quickly tend to alter their habits and write
+  compliant code
+  \item Coding Standards should be adopted from the outset of the project
+  \item If a coding standard is used with existing code that has a proven track
+  record, then the benefits of using the coding standard may be outweighed by
+  the risk of introducing defects in making the code compliant!
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Why Use A Coding Standard?}
+\begin{itemize}
+  \item Simplest way to avoid numerous potential problems
+  \item Mandated by many industrial standards
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Industry standards}
+\begin{block}{DO-178}
+Software Consideration in Airborne Systems & Equipment Certification
+\end{block}
+
+\begin{block}{IEC 61508}
+Functional Safety of Electrical/Electronic/Programmable Electronic
+Safety-related Systems, intended to be a basic functional safety
+standard applicable to all kinds of industry
+\end{block}
+
+\begin{block}{ISO 26262}
+Road vehicles – Functional safety. ISO 26262 is an adaptation of IEC 61508 for
+Automotive Electric/Electronic Systems.
+\end{block}
+
+\begin{block}{MISRA C / MISRA C++}
+Software development guidelines for the C/C++ programming language developed by
+MISRA (Motor Industry Software Reliability Association)
+\end{block}
+
+\begin{block}{JSF++ AV}
+Joint strike fighter air vehicle C++ coding standards for the system
+development and demonstration program
+\end{block}
+\end{frame}
+
+
+\section{MISRA}
+\begin{frame}{MISRA}
+\begin{itemize}
+  \item It is a language subset
+  \item Prevents undefined and unspecified behaviour
+  \item Controls implementation-defined behaviour
+  \item Gives predictable behaviour
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Undefined behavior}
+\begin{lstlisting}
+void f(int a, int b, int c)
+{ 
+  std::cout << "a = " << a 
+          << ", b = " << b 
+          << ", c = " << c 
+          << std::endl; 
+}
+
+void main(void)
+{
+  int i = 0;  
+  f(i++, i++, i++); 
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}{Myths and Legends}
+\begin{block}{Does NOT}
+\begin{itemize}
+  \item Say the rules must be followed all the time
+  \item Define style or metric guidelines
+  \item Stop developers writing code
+\end{itemize}
+\end{block}
+\begin{block}{Does NOT}
+\begin{itemize}
+  \item Require controlled deviations
+  \item Require style and metrics be applied
+  \item Force developers to think
+\end{itemize}
+\end{block}
+\end{frame}
+
+
+\begin{frame}{Examples}
+\begin{itemize}
+  \item Every defined function shall be called at least once.
+  \item There shall be no unused parameters (named or unnamed) in non-virtual
+  functions.
+  \item Identifiers declared in an inner scope shall not hide an identifier
+  declared in an outer scope.
+  \item Literal zero (0) shall not be used as the null-pointer-constant.
+\end{itemize}
 \end{frame}
 
 

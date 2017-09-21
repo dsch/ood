@@ -272,6 +272,50 @@ bis zum ersten Befehl in der Funktion ausgeführt.
 
 \section{Introduction}
 
+\subsection{C++}
+\begin{frame}{C++ - Overview}
+\begin{itemize}
+  \item compiled language
+  \item general-purpose programming language
+  \item Multi-pradigma
+  \begin{itemize}
+    \item procedural
+    \item functional
+    \item object-oriented
+    \item generic
+  \end{itemize}
+  \item statically typed
+  \item allows low-level memory manipulation
+  \item designed for large, resource constrained systems 
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{C++ - Standardization}
+\itemize{}
+\item[1979] C with Classes first implemented 
+\item[1998] C++98 (ISO/IEC 14882:1998)
+\item[2003] C++03 (ISO/IEC 14882:2003)
+\item[2011] C++11 (ISO/IEC 14882:2011)
+\item[2014] C++14 (ISO/IEC 14882:2014)
+\item[2017] C++17 (also called C++1z)
+\end{frame}
+
+\begin{frame}{The Boost Library}
+\begin{itemize}
+  \item Started arround 1999
+  \item several Boost libraries have been accepted for incorporation into the
+  C++11 standard.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Emedded Systems}
+\begin{itemize}
+  \item Embedded C++ (still in use?)
+\end{itemize}
+\end{frame}
+
+
 \subsection{Object-oriented programming}
 
 \begin{frame}{Pradigma}
@@ -339,331 +383,6 @@ Define a implementation for a specialized type. Or change the behavior of a
 class by subtyping it and overwrite a method.
 \end{frame}
 
-\subsection{C++}
-\begin{frame}{C++ - Overview}
-\begin{itemize}
-  \item compiled language
-  \item general-purpose programming language
-  \item Multi-pradigma
-  \begin{itemize}
-    \item procedural
-    \item functional
-    \item object-oriented
-    \item generic
-  \end{itemize}
-  \item statically typed
-  \item allows low-level memory manipulation
-  \item designed for large, resource constrained systems 
-\end{itemize}
-\end{frame}
-
-
-\begin{frame}{C++ - Standardization}
-\itemize{}
-\item[1979] C with Classes first implemented 
-\item[1998] C++98 (ISO/IEC 14882:1998)
-\item[2003] C++03 (ISO/IEC 14882:2003)
-\item[2011] C++11 (ISO/IEC 14882:2011)
-\item[2014] C++14 (ISO/IEC 14882:2014)
-\item[2017] C++17 (also called C++1z)
-\end{frame}
-
-\begin{frame}{The Boost Library}
-\begin{itemize}
-  \item Started arround 1999
-  \item several Boost libraries have been accepted for incorporation into the
-  C++11 standard.
-\end{itemize}
-\end{frame}
-
-\begin{frame}{Emedded Systems}
-\begin{itemize}
-  \item Embedded C++ (still in use?)
-\end{itemize}
-\end{frame}
-
-
-\part{Project organisation}
-
-\section{Organising code in C++}
-
-\begin{frame}{Why bother with organisation?}
-\begin{itemize}
-  \item speed up compiling time
-  \item reduce build dependencies
-  \item avoid name clashes
-  \item better code management
-  \item improves collaborative work
-\end{itemize}
-\end{frame}
-
-\begin{frame}{One definition rule}
-\begin{enumerate}
-  \item In any translation unit, a template, type, function or object can have
-  no more than one definition.
-  \item In the entire program, an object or non-inline function cannot have more
-  than one definition.
-  \item Some things, like types, templates, and extern inline functions, can be
-  defined in more than one translation unit.
-\end{enumerate}
-\end{frame}
-
-\begin{frame}{Header vs. Source-Files}
-\begin{itemize}
-  \item [Header] Declarations
-  \item [Source] Implementations 
-\end{itemize}
-A function defined entirely inside a class definition is implicitly an inline
-function.
-\end{frame}
-
-\begin{frame}{Code organisation}
-\begin{itemize}
-  \item Each class in it's own file
-  \item Each namespace in it's own directory
-\end{itemize}
-No rule without exception!
-\end{frame}
-
-
-\section{Buildsystem}
-\subsection{Tools}
-\begin{frame}{Tools}
-\begin{description}
-  \item[Code:Blocks] \url{http://www.codeblocks.org/}
-  \item[Git for Windows] \url{https://git-for-windows.github.io/}
-  \item[TortoiseGit] \url{https://tortoisegit.org/}
-  \item[CMake] \url{https://cmake.org/}  
-\end{description}
-\end{frame}
-
-
-\part{Object Oriented Design}
-
-\section{Basics}
-
-\begin{frame}
-Design is all about changable code.
-Code is written once, but read many times.
-\end{frame}
-
-
-\section{SOLID}
-
-\begin{frame}{S.O.L.I.D - Principals}
-Defined by Robert C. Martin (Oncle Bob)
-
-\begin{description}
-\item [S] Single-responsiblity principle
-\item [O] Open-closed principle
-\item [L] Liskov substitution principle
-\item [I] Interface segregation principle
-\item [D] Dependency Inversion Principle
-\end{description}
-\end{frame}
-
-\subsection{Single-responsiblity principle}
-
-\begin{frame}[fragile]{Single-responsiblity principle}
-''A class should have only a single responsibility.''
-\end{frame}
-
-\begin{frame}[fragile]{SRP - Example}
-\begin{lstlisting}[caption=SRP Anti-Example]
-class Report
-{
-  void collectData();
-  void print();
-};
-\end{lstlisting}
-
-\begin{block}{Reasons to change:}
-\begin{itemize}
-  \item The content of the report could change.
-  \item The report format chould change.
-\end{itemize}
-\end{block}
-\end{frame}
-
-
-\subsection{Open-closed principle}
-
-\begin{frame}{Open-closed principle}
-''Software entities (classes, modules, functions, etc.) should be open for
-extension, but closed for modification.'
-\end{frame}
-
-\begin{frame}[fragile]{OCP - Example}
-Adding an new class should lead to no or very little changes at the existing
-code.
-
-\begin{lstlisting}[caption=OCP Anti-Example]
-class Square {
-  float length;
-};
-
-class Circle {
-  float radius;
-};
-
-class AreaCalculator {
-  float area(const Square& square) {
-    return std::pow(square.length);
-  }
-  
-  float area(const Circle& circle) {
-    return std::pow(circle.radius) * M_PI;
-  }
-};
-\end{lstlisting}
-\end{frame}
-
-\begin{frame}[fragile]{OCP - Example}
-\begin{lstlisting}[caption=OCP Example]
-class Shape {
-  virtual float area() = 0;
-};
-
-class Square : public Shape {
-  float length;
-  float area() { return std::pow(this->length); }
-};
-
-class Circle : public Shape {
-  float radius;
-  float area() { return std::pow(this->radius) * M_PI; }
-};
-
-class AreaCalculator {
-  float area(const Shape& shape) { return shape.area(); }
-};
-\end{lstlisting}
-\end{frame}
-
-
-\subsection{Liskov substitution principle}
-
-\begin{frame}{Liskov substitution principle}
-''Subtypes must be substitutable for their base types.''
-\end{frame}
-
-\begin{frame}[fragile]{LSP - Example}
-\begin{lstlisting}[caption=LSP Example]
-class Vehicle {
-  virtual void startEngine() {
-    // Default engine start functionality
-  }
-};
-
-class Car : public Vehicle {
-  void startEngine() {
-    this->engageIgnition();
-    Vehicle::startEngine();
-  }
-
-  void engageIgnition() {
-    // Ignition procedure
-  }
-};
-\end{lstlisting}
-Example of LSP Violation: `Square is-a Rectangle`
-\end{frame}
-
-
-\subsection{Interface segregation principle}
-
-\begin{frame}{Interface segregation principle}
-''Many client specific interfaces are better than one general purpose
-interface''
-\end{frame}
-
-\begin{frame}{ISP - Example}
-% TODO ISP Example
-\end{frame}
-
-
-\subsection{Dependency Inversion Principle}
-
-\begin{frame}{Dependency Inversion Principle}
-Report class depends on DataCollection class by calling data-getters.
-
-If the DataCollection implements a ReportData interface and the Report uses only
-this, the two classes are decoupled.
-\end{frame}
-
-\section{Programming idiom}
-\begin{frame}[fragile]{RAII - Resource Acquisition Is Initialization}
-Holding a resource is tied to object lifetime of the `resource handle`.
-\par
-Resource is allocated during handler construction and released during handler
-destruction.
-
-\begin{lstlisting}
-class FileHandle {
-  std::FILE* file;
-public:
-  FileHandle(const std::string& filename) {
-    file = std::fopen(filename.cstr(), "r");
-  }
-  
-  ~FileHandle() {
-    std::fclose(file);
-  }
-};
-\end{lstlisting}
-\end{frame}
-
-\section{Pattern}
-
-\begin{frame}{Creational Patterns}
-\begin{itemize}
-  \item Abstract Factory
-  \item Builder
-  \item Factory Method
-  \item Prototype
-  \item Singleton
-\end{itemize}
-\end{frame}
-
-\begin{frame}{Structural Patterns}
-\begin{itemize}
-  \item Adapter
-  \item Bridge
-  \item Composite
-  \item Decorator
-  \item Façade
-  \item Flyweight
-  \item Proxy
-\end{itemize}
-\end{frame}
-
-\begin{frame}{Behavioral Patterns}
-\begin{itemize}
-  \item Chain of Responsibility
-  \item Command
-  \item Interpreter
-  \item Iterator
-  \item Mediator
-  \item Memento
-  \item Observer
-  \item State
-  \item Strategy
-  \item Template Method
-  \item Visitor
-\end{itemize}
-\end{frame}
-
-\begin{frame}{Build}
-Separate the construction of a complex object from its representation so that
-the same construction process can create different representations.
-\end{frame}
-
-\begin{frame}{Adapter aka Wrapper}
-Convert the interface of a class into another interface clients expect. Adapter
-lets classes work together that couldn't otherwise because of incompatible
-interfaces.
-\end{frame}
-
 \part{C++ Tutorial}{cpp-tutorial}
 
 \begin{frame}{Source}
@@ -676,6 +395,7 @@ reference on cplusplus.com contains some errors,
 \end{block}
 \end{frame}
 
+\section{Basics}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[fragile]{Identifiers}
@@ -1875,6 +1595,287 @@ T* max(T* value1, T* value2)
 % TODO C++ and C
 \end{frame}
 
+
+\part{Project organisation}
+
+\section{Organising code in C++}
+
+\begin{frame}{Why bother with organisation?}
+\begin{itemize}
+  \item speed up compiling time
+  \item reduce build dependencies
+  \item avoid name clashes
+  \item better code management
+  \item improves collaborative work
+\end{itemize}
+\end{frame}
+
+\begin{frame}{One definition rule}
+\begin{enumerate}
+  \item In any translation unit, a template, type, function or object can have
+  no more than one definition.
+  \item In the entire program, an object or non-inline function cannot have more
+  than one definition.
+  \item Some things, like types, templates, and extern inline functions, can be
+  defined in more than one translation unit.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Header vs. Source-Files}
+\begin{itemize}
+  \item [Header] Declarations
+  \item [Source] Implementations 
+\end{itemize}
+A function defined entirely inside a class definition is implicitly an inline
+function.
+\end{frame}
+
+\begin{frame}{Code organisation}
+\begin{itemize}
+  \item Each class in it's own file
+  \item Each namespace in it's own directory
+\end{itemize}
+No rule without exception!
+\end{frame}
+
+
+\section{Buildsystem}
+\subsection{Tools}
+\begin{frame}{Tools}
+\begin{description}
+  \item[Code:Blocks] \url{http://www.codeblocks.org/}
+  \item[Git for Windows] \url{https://git-for-windows.github.io/}
+  \item[TortoiseGit] \url{https://tortoisegit.org/}
+  \item[CMake] \url{https://cmake.org/}  
+\end{description}
+\end{frame}
+
+
+\part{Object Oriented Design}
+
+\section{Basics}
+
+\begin{frame}
+Design is all about changable code.
+Code is written once, but read many times.
+\end{frame}
+
+
+\section{SOLID}
+
+\begin{frame}{S.O.L.I.D - Principals}
+Defined by Robert C. Martin (Oncle Bob)
+
+\begin{description}
+\item [S] Single-responsiblity principle
+\item [O] Open-closed principle
+\item [L] Liskov substitution principle
+\item [I] Interface segregation principle
+\item [D] Dependency Inversion Principle
+\end{description}
+\end{frame}
+
+\subsection{Single-responsiblity principle}
+
+\begin{frame}[fragile]{Single-responsiblity principle}
+''A class should have only a single responsibility.''
+\end{frame}
+
+\begin{frame}[fragile]{SRP - Example}
+\begin{lstlisting}[caption=SRP Anti-Example]
+class Report
+{
+  void collectData();
+  void print();
+};
+\end{lstlisting}
+
+\begin{block}{Reasons to change:}
+\begin{itemize}
+  \item The content of the report could change.
+  \item The report format chould change.
+\end{itemize}
+\end{block}
+\end{frame}
+
+
+\subsection{Open-closed principle}
+
+\begin{frame}{Open-closed principle}
+''Software entities (classes, modules, functions, etc.) should be open for
+extension, but closed for modification.'
+\end{frame}
+
+\begin{frame}[fragile]{OCP - Example}
+Adding an new class should lead to no or very little changes at the existing
+code.
+
+\begin{lstlisting}[caption=OCP Anti-Example]
+class Square {
+  float length;
+};
+
+class Circle {
+  float radius;
+};
+
+class AreaCalculator {
+  float area(const Square& square) {
+    return std::pow(square.length);
+  }
+  
+  float area(const Circle& circle) {
+    return std::pow(circle.radius) * M_PI;
+  }
+};
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{OCP - Example}
+\begin{lstlisting}[caption=OCP Example]
+class Shape {
+  virtual float area() = 0;
+};
+
+class Square : public Shape {
+  float length;
+  float area() { return std::pow(this->length); }
+};
+
+class Circle : public Shape {
+  float radius;
+  float area() { return std::pow(this->radius) * M_PI; }
+};
+
+class AreaCalculator {
+  float area(const Shape& shape) { return shape.area(); }
+};
+\end{lstlisting}
+\end{frame}
+
+
+\subsection{Liskov substitution principle}
+
+\begin{frame}{Liskov substitution principle}
+''Subtypes must be substitutable for their base types.''
+\end{frame}
+
+\begin{frame}[fragile]{LSP - Example}
+\begin{lstlisting}[caption=LSP Example]
+class Vehicle {
+  virtual void startEngine() {
+    // Default engine start functionality
+  }
+};
+
+class Car : public Vehicle {
+  void startEngine() {
+    this->engageIgnition();
+    Vehicle::startEngine();
+  }
+
+  void engageIgnition() {
+    // Ignition procedure
+  }
+};
+\end{lstlisting}
+Example of LSP Violation: `Square is-a Rectangle`
+\end{frame}
+
+
+\subsection{Interface segregation principle}
+
+\begin{frame}{Interface segregation principle}
+''Many client specific interfaces are better than one general purpose
+interface''
+\end{frame}
+
+\begin{frame}{ISP - Example}
+% TODO ISP Example
+\end{frame}
+
+
+\subsection{Dependency Inversion Principle}
+
+\begin{frame}{Dependency Inversion Principle}
+Report class depends on DataCollection class by calling data-getters.
+
+If the DataCollection implements a ReportData interface and the Report uses only
+this, the two classes are decoupled.
+\end{frame}
+
+\section{Programming idiom}
+\begin{frame}[fragile]{RAII - Resource Acquisition Is Initialization}
+Holding a resource is tied to object lifetime of the `resource handle`.
+\par
+Resource is allocated during handler construction and released during handler
+destruction.
+
+\begin{lstlisting}
+class FileHandle {
+  std::FILE* file;
+public:
+  FileHandle(const std::string& filename) {
+    file = std::fopen(filename.cstr(), "r");
+  }
+  
+  ~FileHandle() {
+    std::fclose(file);
+  }
+};
+\end{lstlisting}
+\end{frame}
+
+\section{Pattern}
+
+\begin{frame}{Creational Patterns}
+\begin{itemize}
+  \item Abstract Factory
+  \item Builder
+  \item Factory Method
+  \item Prototype
+  \item Singleton
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Structural Patterns}
+\begin{itemize}
+  \item Adapter
+  \item Bridge
+  \item Composite
+  \item Decorator
+  \item Façade
+  \item Flyweight
+  \item Proxy
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Behavioral Patterns}
+\begin{itemize}
+  \item Chain of Responsibility
+  \item Command
+  \item Interpreter
+  \item Iterator
+  \item Mediator
+  \item Memento
+  \item Observer
+  \item State
+  \item Strategy
+  \item Template Method
+  \item Visitor
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Build}
+Separate the construction of a complex object from its representation so that
+the same construction process can create different representations.
+\end{frame}
+
+\begin{frame}{Adapter aka Wrapper}
+Convert the interface of a class into another interface clients expect. Adapter
+lets classes work together that couldn't otherwise because of incompatible
+interfaces.
+\end{frame}
 
 \part{Clean Code}
 \begin{frame}{Express yourself in code}

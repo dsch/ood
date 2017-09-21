@@ -33,7 +33,7 @@
 
 \title{Advanced programming}
 \author{David Schneider}
-\date{2016}
+\date{2017}
 
 \AtBeginPart{\frame{\partpage}\frame{\frametitle{Content Part
 \insertpart}\tableofcontents}}
@@ -52,10 +52,7 @@ David Schneider
 \end{block}
 
 \begin{block}{Kontakt}
-E-Mail: \\
-\url{schneidav81@gmail.com} \\
-\url{david.schneider@fhwn.ac.at} \\
-Telefon: 0680 1454649
+E-Mail: \url{david.schneider@fhwn.ac.at}
 \end{block}
 
 \end{frame}
@@ -85,9 +82,9 @@ Computertechnik
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Modalitäten}
 \begin{description}
-\item[Umfang] 5 ECTS
+\item[Umfang] 5 ECTS (45 Lektionen = 34h, Total 125h)
 \item[Lehr- und Lernformen]: Vorlesung mit integrierter Übung
-\item[Prüfungsmodalitäten]: LV-abschließende Prüfung; Projektarbeit - Prüfungsgespräch über die Projektarbeit
+\item[Prüfungsmodalitäten]: LV-abschließende Prüfung; Übung, Arbeit
 \end{description}
 \end{frame}
 
@@ -114,25 +111,6 @@ konkreten Problemstellungen.
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Termine 2016}
-\begin{table}
-\begin{tabular}{l | l }
-Datum & Raum \\
-\hline
-23. September 2016 & EDV5 \\
-30. September 2016 & EDV2 \\
-07. Oktober 2016 & EDV2 \\
-14. Oktober 2016 & EDV2 \\
-21. Oktober 2016 & EDV2 \\
-28. Oktober 2016 & EDV2 \\
-04. November 2016 & EDV2 \\
-11. November 2016 & EDV2 \\
-18. November 2016 & EDV2 \\
-25. November 2016 & EDV2
-\end{tabular}
-\end{table}
-\end{frame}
-
 \begin{frame}{Themen}
 \begin{itemize}
   \item Objekt-Orientieres Design
@@ -148,9 +126,28 @@ Datum & Raum \\
 \begin{itemize}
   \item Schriftliche Prüfung (60 Punkte)
   \item Übung: Programming Idiom (30 Punkte)
-  \item Projektarbeit (Linked-List) (60 Punkte)
+  \item Projektarbeit (60 Punkte)
 \end{itemize}
 Für eine positive Beurteilung sind insgesamt 80 Punkte erforderlich.
+\end{frame}
+
+\begin{frame}{Termine 2017}
+\begin{table}
+\begin{tabular}{l | l | l }
+Datum & Raum \\
+\hline
+22. September 2017 & EDV9 \\
+29. September 2017 & EDV6 \\
+06. Oktober 2017 & EDV6 \\
+20. Oktober 2017 & EDV6 \\
+03. November 2017 & EDV6 & Abgabe Übung\\
+10. November 2017 & EDV6 \\
+17. November 2017 & EDV6 \\
+24. November 2017 & EDV6 \\
+01. Dezember 2017 & EDV8 & Fertigstellen und Abgabe Arbeit\\
+15. Dezember 2017 & EDV6 & Schriftliche Prüfung
+\end{tabular}
+\end{table}
 \end{frame}
 
 %\begin{frame}{Gegrüfte Themen}
@@ -167,7 +164,7 @@ Für eine positive Beurteilung sind insgesamt 80 Punkte erforderlich.
 
 \section{Einstufung}
 \begin{frame}[fragile]{Frage 1}
-Was ist der output von folgendem Code:
+Was ist die Ausgabe von folgendem Code:
 \begin{lstlisting}
 for (int i = 0; i < 5; ++i)
 {
@@ -176,12 +173,7 @@ for (int i = 0; i < 5; ++i)
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}{Frage 2}
-Was ist der Unterschied zwischen Stack und Heap? Wann wir welcher Speicher
-verwended? Wie wird eine Stack-Variable deklariert und wie eine Heap-Variable?
-\end{frame}
-
-\begin{frame}[fragile]{Frage 3}
+\begin{frame}[fragile]{Frage 2}
 Was ist der Typ und der Wert des folgenden Ausdrucks?
 \begin{lstlisting}
 int x = 12;
@@ -191,14 +183,76 @@ int y = 7;
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile]{Frage 4}
+\begin{frame}[fragile]{Frage 3}
 Was ist der Inhalt der Variablen str und p?
 \begin{lstlisting}
-char str[20] = "Hello";
-char *const p = str;
-*p = 'M';
+char str[10] = "Hello";
+char *const p = &str[1];
+*p = 'a';
 \end{lstlisting}
 \end{frame}
+
+\begin{frame}[fragile]{Frage 4}
+Was ist der Unterschied zwischen Step-Over und Step-Into (im Debugger)?
+\end{frame}
+
+\section{Lösungen}
+\begin{frame}[fragile]{Frage 1}
+Was ist die Ausgabe von folgendem Code:
+\begin{lstlisting}
+for (int i = 0; i < 5; ++i)
+{
+  std::cout << i << std::endl;
+}
+\end{lstlisting}
+
+\begin{lstlisting}
+0
+1
+2
+3
+4
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Frage 2}
+Was ist der Typ und der Wert des folgenden Ausdrucks?
+\begin{lstlisting}
+int x = 12;
+int y = 7;
+
+(x != 4) || (y == 2)
+\end{lstlisting}
+Typ: boolean
+
+Wert: true
+\end{frame}
+
+\begin{frame}[fragile]{Frage 3}
+Was ist der Inhalt der Variablen str und p?
+\begin{lstlisting}
+char str[10] = "Hello";
+char *const p = &str[1];
+*p = 'a';
+\end{lstlisting}
+
+str:
+\textquotedblleft{}Hallo\textbackslash0\textbackslash0\textbackslash0
+                      \textbackslash0\textbackslash0\textquotedblright
+
+p: Adresse des zweiten Zeichens in str
+\end{frame}
+
+\begin{frame}[fragile]{Frage 4}
+Was ist der Unterschied zwischen Step-Over und Step-Into (im Debugger)?
+
+Step-Over: Führt den gesamten anstehenden Befehl (Ausdruck) aus. Der Programm
+Zähler steht auf dem nächsten Befehl.
+
+Step-Into: Ist der anstehende Befehl ein Funktionsaufruf, wird das Programm 
+bis zum ersten Befehl in der Funktion ausgeführt.
+\end{frame}
+
 
 \part{Introduction}
 

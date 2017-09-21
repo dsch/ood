@@ -312,6 +312,7 @@ bis zum ersten Befehl in der Funktion ausgeführt.
 \begin{frame}{Emedded Systems}
 \begin{itemize}
   \item Embedded C++ (still in use?)
+  \item Adaptive AUTOSAR
 \end{itemize}
 \end{frame}
 
@@ -637,10 +638,10 @@ operator & description \\
 \hline
 == & Equal to \\
 != & Not equal to \\
-< & Less than \\
-> & Greater than \\
-<= & Less than or equal to \\
->= & Greater than or equal to
+\textless & Less than \\
+\textgreater & Greater than \\
+\leq & Less than or equal to \\
+\geq & Greater than or equal to
 \end{tabular}
 \caption{Relational and comparison operators}
 \end{table}
@@ -669,8 +670,8 @@ operator & description \\
 \& & Bitwise AND \\
 \textbar & Bitwise inclusive OR \\
 \textasciitilde & Unary complement (bit inversion) \\
-<< & Shift bits left \\
->> & Shift bits right
+\textless\textless & Shift bits left \\
+\textgreater\textgreater & Shift bits right
 \end{tabular}
 \caption{Bitwise operators}
 \end{table}
@@ -851,6 +852,59 @@ std::string concatenate(const std::string& a,
 \lstinputlisting[caption=Default value example]{lst/DefaultValue.cpp}
 \end{frame}
 
+
+\subsection{Name visibility}
+\begin{frame}{Scopes}
+\begin{description}
+\item[global scope] valid anywhere in the code
+\item[namespace scope] group of entities in global scope
+\item[local scope] only visible within the specific block in which it is
+declared
+\end{description}
+\end{frame}
+
+\begin{frame}[fragile]{Namespaces}
+\begin{lstlisting}[caption=Namespace]
+namespace myNamespace
+{
+  int a;
+  float b;
+}
+
+void foo()
+{
+  std::cout << myNamespace::a;
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Using}
+The keyword using introduces a name into the current declarative region (such as
+a block), thus avoiding the need to qualify the name.
+\begin{lstlisting}[caption=using]
+void foo()
+{
+  using std::cout;
+  cout << "it's here";
+}
+\end{lstlisting}
+\begin{lstlisting}[caption=using namespace]
+using namespace myNamespace;
+\end{lstlisting}
+
+\begin{lstlisting}[caption=namespace alias]
+namespace expr = boost::log::expressions;
+\end{lstlisting}
+
+\end{frame}
+
+\begin{frame}{Storage classes}
+\begin{description}
+\item[static storage] Global, initalized to zero
+\item[automatic storage] Local, uninitialized
+\end{description}
+\end{frame}
+
 \begin{frame}[fragile]{Lvalue reference declarator}
 Syntax: \lstinline{S& d;}
 \begin{itemize}
@@ -932,57 +986,6 @@ T sum(T a, T b)
 }\end{lstlisting}
 \end{frame}
 
-\subsection{Name visibility}
-\begin{frame}{Scopes}
-\begin{description}
-\item[global scope] valid anywhere in the code
-\item[namespace scope] group of entities in global scope
-\item[local scope] only visible within the specific block in which it is
-declared
-\end{description}
-\end{frame}
-
-\begin{frame}[fragile]{Namespaces}
-\begin{lstlisting}[caption=Namespace]
-namespace myNamespace
-{
-  int a;
-  float b;
-}
-
-void foo()
-{
-  std::cout << myNamespace::a;
-}
-\end{lstlisting}
-\end{frame}
-
-\begin{frame}[fragile]{Using}
-The keyword using introduces a name into the current declarative region (such as
-a block), thus avoiding the need to qualify the name.
-\begin{lstlisting}[caption=using]
-void foo()
-{
-  using std::cout;
-  cout << "it's here";
-}
-\end{lstlisting}
-\begin{lstlisting}[caption=using namespace]
-using namespace myNamespace;
-\end{lstlisting}
-
-\begin{lstlisting}[caption=namespace alias]
-namespace expr = boost::log::expressions;
-\end{lstlisting}
-
-\end{frame}
-
-\begin{frame}{Storage classes}
-\begin{description}
-\item[static storage] Global, initalized to zero
-\item[automatic storage] Local, uninitialized
-\end{description}
-\end{frame}
 
 \section{Compound data types}
 \subsection{Arrays}
@@ -2626,9 +2629,9 @@ add_test(NAME MyModule COMMAND TestMyModule)
 \begin{frame}{Hello World}
 \begin{itemize}
   \item Create a `Hello World` application
+  \item Create an input for your name and print `Hallo \textit{your name}` 
   \item Simple Calculator: Read two values and print sum
-  \item Animal sounds: Implement classes Dog, Cat and Cow and it's base-class
-  Animal, with a common makeSound() method.
+  \item Implement more operations for the calculator
 \end{itemize}
 \end{frame}
 

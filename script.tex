@@ -925,6 +925,7 @@ Syntax: \lstinline{S& d;}
 \end{frame}
 
 \begin{frame}[fragile]{Rvalue reference declarator}
+{\small since C++11}
 Syntax: \lstinline{S&& d;}
 \begin{itemize}
   \item Rvalue references can be used to extend the lifetimes of temporary
@@ -962,7 +963,7 @@ std::string s = f();  // undefined behavior: copy-initializes from a dangling re
 \end{lstlisting}
 \end{frame}
 
-\subsection{Overloads and templates}
+\subsection{Overloads}
 \begin{frame}[fragile]{Overloaded functions}
 \begin{lstlisting}[caption=Overloaded functions]
 int operate(int a, int b)
@@ -977,14 +978,6 @@ double operate(double a, double b)
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile]{Templates}
-\begin{lstlisting}[caption=Templates]
-template <typename T>
-T sum(T a, T b)
-{
-  return a + b;
-}\end{lstlisting}
-\end{frame}
 
 
 \section{Compound data types}
@@ -1288,14 +1281,6 @@ foo = bar;  // object already init: copy assignment called
 \end{lstlisting}
 \end{frame}
 
-\subsection{Templates}
-
-\begin{frame}{Templates}
-Function templates
-Class templates
-Template specialization
-\end{frame}
-
 \section{Other language features}
 \subsection{Type conversions}
 \begin{frame}[fragile]{Implicit conversion}
@@ -1488,6 +1473,14 @@ runtime\_error & error detected during runtime
 \part{Generic Programming}
 
 \section{Templates}
+\subsection{Templates}
+
+\begin{frame}{Templates}
+Function templates
+Class templates
+Template specialization
+\end{frame}
+
 \begin{frame}{Templates}
 \begin{itemize}
   \item class template
@@ -1495,6 +1488,15 @@ runtime\_error & error detected during runtime
   \item alias template (since C++11)
   \item variable template (since C++14)
 \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Templates}
+\begin{lstlisting}[caption=Templates]
+template <typename T>
+T sum(T a, T b)
+{
+  return a + b;
+}\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]{class template}
@@ -2629,7 +2631,7 @@ add_test(NAME MyModule COMMAND TestMyModule)
 \begin{frame}{Hello World}
 \begin{itemize}
   \item Create a `Hello World` application
-  \item Create an input for your name and print `Hallo \textit{your name}` 
+  \item Create an input for your name and print `Hallo \textit{your name}`
   \item Simple Calculator: Read two values and print sum
   \item Implement more operations for the calculator
 \end{itemize}
@@ -2637,22 +2639,19 @@ add_test(NAME MyModule COMMAND TestMyModule)
 
 \section{Exercise 2}
 
-\begin{frame}{Smart Pointer}
-\subtitle{}
-Implement a `Smart Pointer` which handles object-live-time of a newly created
-object.
-\par
-Features:
+\begin{frame}{String class}
+Implement a String class.
+
+Requirements:
 \begin{itemize}
-  \item allocate and free the memory
-  \item overload `pointer dereference` operator to access pointee members
-  \item implement assignment operator
-  \item implement copy operator (with reference counting)
+  \item Construct from string literal and std::string
+  \item Copy constructor
+  \item Assign from string literal and std::string
+  \item Concatinate two instances of String (as method, better overload
+  operator+)
+  \item Output to std::cout
 \end{itemize}
-
 \end{frame}
-
-\section{Exercise 3}
 
 \begin{frame}[fragile]{String builder - Background}
 Appending to std::string seams a very easy task, but is't very expensiv
@@ -2686,6 +2685,23 @@ for (int i=0; i<1000; i++) {
 std::string str = str_builder.toString();
 // better: std::string str = str_builder;
 \end{lstlisting}
+
+\end{frame}
+
+\section{Exercise 3}
+
+\begin{frame}{Smart Pointer}
+\subtitle{}
+Implement a `Smart Pointer` which handles object-live-time of a newly created
+object.
+\par
+Features:
+\begin{itemize}
+  \item allocate and free the memory
+  \item overload `pointer dereference` operator to access pointee members
+  \item implement assignment operator
+  \item implement copy operator (with reference counting)
+\end{itemize}
 
 \end{frame}
 

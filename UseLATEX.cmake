@@ -442,15 +442,15 @@ function(latex_execute_latex)
 
   # Chose the native method for parsing command arguments. Newer versions of
   # CMake allow you to just use NATIVE_COMMAND.
-  if (CMAKE_VERSION VERSION_GREATER_EQUAL 3.9)
+  #if (CMAKE_VERSION VERSION_GREATER_EQUAL 3.9)
     set(separate_arguments_mode NATIVE_COMMAND)
-  else()
+  #else()
     if (WIN32)
       set(separate_arguments_mode WINDOWS_COMMAND)
     else()
       set(separate_arguments_mode UNIX_COMMAND)
     endif()
-  endif()
+  #endif()
 
   # Preps variables for use in execute_process.
   # Even though we expect LATEX_WORKING_DIRECTORY to have a single "argument,"

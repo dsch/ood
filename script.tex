@@ -1466,8 +1466,23 @@ runtime\_error & error detected during runtime
 
 \section{Quirks}
 
-\begin{frame}{Most vexing parse}
-% TOOD Most vexing parse
+\begin{frame}[fragile]{Most vexing parse}
+A syntactic ambiguity resolution in the C++ programming language
+\begin{lstlisting}
+class Foo
+{
+  Foo();
+};
+
+class Bar
+{
+  Bar(const Foo& foo);
+};
+
+Bar bar(Foo()); // interpreted as function declaration
+
+Bar bar{Foo{}}; // interpreted as variable
+\end{lstlisting}
 \end{frame}
 
 
@@ -1872,15 +1887,49 @@ public:
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Build}
+\begin{frame}{Creational Pattern - Builder}
 Separate the construction of a complex object from its representation so that
 the same construction process can create different representations.
+\\Example: StringBuilder
 \end{frame}
 
-\begin{frame}{Adapter aka Wrapper}
-Convert the interface of a class into another interface clients expect. Adapter
-lets classes work together that couldn't otherwise because of incompatible
-interfaces.
+\begin{frame}[fragile]{Creational Pattern - Factory Method}
+A method to simplify or controll the create of an instance.
+\\Example: Register the newly created object in an index.
+\begin{lstlisting}
+class Complex
+{
+private:
+  Complex(double real);
+public:
+  static Complex FromRealNumber(double real);
+};
+
+Complex fulcrumPoint = Complex::FromRealNumber(23.0);
+\end{lstlisting}
+
+\end{frame}
+
+\begin{frame}{Iterator}
+An Iterator could be used to traverse a container and access it's elements. The
+iterator pattern decouples algorithms from containers; in some cases, algorithms
+are necessarily container-specific and thus cannot be decoupled.
+\\Example: std::vector::iterator
+\end{frame}
+
+\begin{frame}{Singleton}
+The singleton pattern is a software design pattern that restricts the
+instantiation of a class to one object. This is useful when exactly one object
+is needed to coordinate actions across the system.  
+\end{frame}
+
+\begin{frame}{Singleton - Example}
+\lstinputlisting[lastline=26]{lst/singleton.cpp}
+\end{frame}
+
+\begin{frame}{Adapter or Wrapper}
+Converts one interface to another so that it matches what the client is
+expecting. Adapter makes unrelated classes work together.
 \end{frame}
 
 \part{Clean Code}
@@ -2404,7 +2453,7 @@ void clever_copy(char* to, const char* from, int count)
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Industry standards}
+\begin{frame}{Industry standards 1/2}
 \begin{block}{DO-178}
 Software Consideration in Airborne Systems \& Equipment Certification
 \end{block}
@@ -2419,7 +2468,9 @@ standard applicable to all kinds of industry
 Road vehicles – Functional safety. ISO 26262 is an adaptation of IEC 61508 for
 Automotive Electric/Electronic Systems.
 \end{block}
+\end{frame}
 
+\begin{frame}{Industry standards 2/2}
 \begin{block}{MISRA C / MISRA C++}
 Software development guidelines for the C/C++ programming language developed by
 MISRA (Motor Industry Software Reliability Association)
@@ -2468,7 +2519,7 @@ void main(void)
   \item Stop developers writing code
 \end{itemize}
 \end{block}
-\begin{block}{Does NOT}
+\begin{block}{Does}
 \begin{itemize}
   \item Require controlled deviations
   \item Require style and metrics be applied
